@@ -8,6 +8,7 @@ class AnnotationCard extends Component {
         <h1>{this.props.headline}</h1>
         <p>{this.props.source}</p>
         <p>{this.props.content}</p>
+        <br />
       </div>
     );
   }

@@ -72,8 +72,6 @@ class DetailContainer extends Component {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.log(error));
-
-
   }
 
   onInputChange = (event) => {
@@ -101,13 +99,17 @@ class DetailContainer extends Component {
     let xCoord = individualAnnotation.xCoord;
     let yCoord = individualAnnotation.yCoord;
 
-    this.setState = {
+    this.setState({
       xCoord: xCoord,
       yCoord: yCoord,
       displayingMarker: true,
-    }
-
+    });
   }
+
+  onAnnotationCardDelete = (event, individualAnnotation) => {
+    console.log("You attempted a delete!")
+  }
+
 
 
 
