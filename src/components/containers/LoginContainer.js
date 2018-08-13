@@ -30,7 +30,7 @@ class LoginContainer extends Component {
   }
 
   findUser = (data) => {
-    let foundUser = data.users.find(indivdualUser => indivdualUser.username == this.state.username);
+    let foundUser = data.users.find(indivdualUser => indivdualUser.username === this.state.username);
 
     if (!foundUser){
       throw new Error("Login attempt failed.");
