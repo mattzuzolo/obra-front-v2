@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 
 import AnnotationCard from "../AnnotationCard"
 
-
 // const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
 const annotationUrl = "http://localhost:4000/annotations";
-
-
 
 class DetailContainer extends Component {
   constructor(props){
@@ -32,19 +29,13 @@ class DetailContainer extends Component {
   }
 
   filterAnnotationsByArtwork = (annotationData) => {
-    // console.log("Annotations in filter method:", annotationData)
-    // console.log("FETCHED art: ", annotationData[0].artwork);
-    // console.log("SELECTED art: ", this.props.selectedArtwork._id)
     let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork == this.props.selectedArtwork._id);
-    // console.log("Filtered anotations", filteredAnnotations);
     this.setState({ annotationArray: filteredAnnotations })
   }
 
 
   onAnnotationSubmit = (event) => {
     event.preventDefault();
-    // console.log("You submitted an annotation!")
-    // console.log("Currently selected artwork", this.props.selectedArtwork)
 
     let submissionBody = {
       artwork: [this.props.selectedArtwork],
@@ -56,8 +47,6 @@ class DetailContainer extends Component {
       yCoord: this.state.yCoord,
     }
 
-    // console.log("Submission body", submissionBody)
-
     let postConfig = {
        method: "POST",
        headers: {
@@ -65,8 +54,6 @@ class DetailContainer extends Component {
        },
        body: JSON.stringify(submissionBody)
     }
-
-    // console.log("posConfig: ", postConfig);
 
     fetch(annotationUrl, postConfig)
       .then(response => response.json())
@@ -100,7 +87,6 @@ class DetailContainer extends Component {
   }
 
   onAnnotationCardClick = (event, individualAnnotation) => {
-    console.log("You clicked an annotation!!!", individualAnnotation);
     let xCoord = individualAnnotation.xCoord;
     let yCoord = individualAnnotation.yCoord;
 
@@ -111,21 +97,30 @@ class DetailContainer extends Component {
     });
   }
 
+  onAnnotationCardPut = (event, individualAnnotation) => {
+    let urlWithId = annotationUrl + "/" + individualAnnotation._id
+
+    fetch(urlWithId, {
+        method: 'PUT',
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
+  }
+
   onAnnotationCardDelete = (event, individualAnnotation) => {
-    console.log("You attempted a delete!")
+    let urlWithId = annotationUrl + "/" + individualAnnotation._id
+
+    fetch(urlWithId, {
+        method: 'DELETE',
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
   }
 
 
-
-
   render(){
-    // console.log("headline value: ", this.state.headline)
-    // console.log("sourceLink value: ", this.state.sourceLink)
-    // console.log("content value: ", this.state.content)
-    // console.log("Is marker being displayed?", this.state.displayingMarker);
-    // console.log(`X/Y coords: ${this.state.xCoord} / ${this.state.yCoord}`);
-    // console.log("state at render", this.state)
-
 
     let annotationMarkerStyle = {
       top: this.state.yCoord,
@@ -171,6 +166,8 @@ class DetailContainer extends Component {
               source={individualAnnotation.source}
               content={individualAnnotation.content}
               onAnnotationCardClick={this.onAnnotationCardClick}
+              onAnnotationCardPut={this.onAnnotationCardPut}
+              onAnnotationCardDelete={this.onAnnotationCardDelete}
             />
           ))}
         </div>
