@@ -29,7 +29,7 @@ class DetailContainer extends Component {
 
     let submissionBody = {
       artwork: [this.props.selectedArtwork],
-      user: null,
+      user: [this.props.loggedInUser],
       headline: this.state.headline,
       source: this.state.sourceLink,
       content: this.state.content,
@@ -130,6 +130,7 @@ class DetailContainer extends Component {
 function mapStateToProps(state){
   return {
     selectedArtwork: state.selectedArtwork,
+    loggedInUser: state.loggedInUser,
   }
 }
 
