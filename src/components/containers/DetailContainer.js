@@ -57,11 +57,12 @@ class DetailContainer extends Component {
 
     fetch(annotationUrl, postConfig)
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => console.log("New annotation ID", data))
       .then(data => this.setState({
         headline: "",
         sourceLink: "",
         content: "",
+        annotationArray: [...this.state.annotationArray, data]
       }))
       .catch(error => console.log(error));
   }
@@ -99,7 +100,7 @@ class DetailContainer extends Component {
 
   onAnnotationCardPut = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
-    console.log("This button will edit things in the future", individualAnnotation)
+    // console.log("annotation on render", individualAnnotation)
 
     // let submissionBody = {
     //   artwork: [this.props.selectedArtwork],
@@ -144,7 +145,7 @@ class DetailContainer extends Component {
       position: "absolute",
     }
 
-
+    console.log("Annotation array at render", this.state.annotationArray)
     return(
       <div>
         <div id="annotation-zone"  >
