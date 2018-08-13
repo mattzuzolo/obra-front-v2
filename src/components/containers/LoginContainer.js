@@ -18,14 +18,29 @@ class LoginContainer extends Component {
 
   onLoginSubmit = (event) => {
     event.preventDefault();
-    console.log("You tried to login!")
+
+    fetch("http://localhost:4000/users")
+      .then(response => response.json())
+      // .then(data => console.log("users GET", data))
+      .then(data => this.findUser(data))
+      .catch(error => console.log ("ERROR DURING FETCH: ", error))
+  }
+
+  findUser = (data) => {
+    let foundUser = data.users.find(indivdualUser => indivdualUser.username == this.state.username);
+
+    if (!foundUser){
+      return alert("Failed to login");
+    }
+    return foundUser;
   }
 
   render(){
     console.log("State on render", this.state)
+
     return(
       <div>
-      <form onSubmit={this.onLoginSubmitm}>
+      <form onSubmit={this.onLoginSubmit}>
         <label>Username:</label>
         <input placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange} ></input>
 
@@ -37,10 +52,6 @@ class LoginContainer extends Component {
       </div>
     )
   }
-
-
-
-
 }
 
 export default LoginContainer;

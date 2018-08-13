@@ -37,7 +37,7 @@ class DetailContainer extends Component {
       yCoord: this.state.yCoord,
     }
 
-    console.log("Submission body", submissionBody)
+    // console.log("Submission body", submissionBody)
 
     let postConfig = {
        method: "POST",
@@ -47,7 +47,7 @@ class DetailContainer extends Component {
        body: JSON.stringify(submissionBody)
     }
 
-    console.log("posConfig: ", postConfig);
+    // console.log("posConfig: ", postConfig);
 
     fetch(annotationUrl, postConfig)
       .then(response => response.json())
@@ -85,7 +85,7 @@ class DetailContainer extends Component {
     // console.log("content value: ", this.state.content)
     // console.log("Is marker being displayed?", this.state.displayingMarker);
     // console.log(`X/Y coords: ${this.state.xCoord} / ${this.state.yCoord}`);
-    console.log("state at render", this.state)
+    // console.log("state at render", this.state)
 
 
     let annotationMarkerStyle = {
