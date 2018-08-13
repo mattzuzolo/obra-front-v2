@@ -96,8 +96,17 @@ class DetailContainer extends Component {
     })
   }
 
-  onAnnotationCardClick = (event) => {
-    console.log("You clicked an annotation!!!")
+  onAnnotationCardClick = (event, individualAnnotation) => {
+    console.log("You clicked an annotation!!!", individualAnnotation);
+    let xCoord = individualAnnotation.xCoord;
+    let yCoord = individualAnnotation.yCoord;
+
+    this.setState = {
+      xCoord: xCoord,
+      yCoord: yCoord,
+      displayingMarker: true,
+    }
+
   }
 
 
