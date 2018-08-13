@@ -51,7 +51,6 @@ class DetailContainer extends Component {
   }
 
   onInputChange = (event) => {
-    event.persist();
     let fieldName = event.target.name;
     let currentValue = event.target.value;
     this.setState({ [fieldName]: currentValue })

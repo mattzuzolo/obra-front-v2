@@ -7,7 +7,7 @@ import './App.css';
 import NavBar from "./components/NavBar"
 import IndexContainer from "./components/containers/IndexContainer";
 import DetailContainer from "./components/containers/DetailContainer";
-
+import LoginContainer from "./components/containers/LoginContainer";
 
 // import { connect } from 'react-redux'
 // import { changeExampleMessage } from './actions'
@@ -34,6 +34,7 @@ class App extends Component {
             <Route path="/artwork" render={(routerProps) => <IndexContainer
                 routerProps={routerProps} />}/>
 
+            <Route path="/login" component={LoginContainer} />
           </Switch>
       </div>
     );
