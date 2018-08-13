@@ -99,17 +99,17 @@ class DetailContainer extends Component {
 
   onAnnotationCardPut = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
-    console.log("You are attempting to edit!", individualAnnotation)
+    console.log("This button will edit things in the future", individualAnnotation)
 
-    let submissionBody = {
-      artwork: [this.props.selectedArtwork],
-      user: [this.props.loggedInUser],
-      headline: this.state.headline,
-      source: this.state.sourceLink,
-      content: this.state.content,
-      xCoord: this.state.xCoord,
-      yCoord: this.state.yCoord,
-    }
+    // let submissionBody = {
+    //   artwork: [this.props.selectedArtwork],
+    //   user: [this.props.loggedInUser],
+    //   headline: this.state.headline,
+    //   source: this.state.sourceLink,
+    //   content: this.state.content,
+    //   xCoord: this.state.xCoord,
+    //   yCoord: this.state.yCoord,
+    // }
 
     // fetch(urlWithId, {
     //   method: 'PUT',
