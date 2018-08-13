@@ -130,7 +130,7 @@ class DetailContainer extends Component {
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
-      position: "fixed",
+      position: "absolute",
     }
 
 
