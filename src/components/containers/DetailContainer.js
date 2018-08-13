@@ -99,13 +99,29 @@ class DetailContainer extends Component {
 
   onAnnotationCardPut = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
+    console.log("You are attempting to edit!", individualAnnotation)
 
-    fetch(urlWithId, {
-        method: 'PUT',
-        headers: {
-          "Content-type": "application/json"
-        }
-      });
+    let submissionBody = {
+      artwork: [this.props.selectedArtwork],
+      user: [this.props.loggedInUser],
+      headline: this.state.headline,
+      source: this.state.sourceLink,
+      content: this.state.content,
+      xCoord: this.state.xCoord,
+      yCoord: this.state.yCoord,
+    }
+
+    // fetch(urlWithId, {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ message: { real_name: 'Matt', message: 'My edit was successful'}})
+    // })
+    //   .then( res => res.json())
+    //   .then( json => {
+    //     console.log(json);
+    //   })
   }
 
   onAnnotationCardDelete = (event, individualAnnotation) => {
