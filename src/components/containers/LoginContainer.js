@@ -25,7 +25,7 @@ class LoginContainer extends Component {
     console.log("State on render", this.state)
     return(
       <div>
-      <form onSubmit={this.onLoginSubmit}>
+      <form onSubmit={this.onLoginSubmitm}>
         <label>Username:</label>
         <input placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange} ></input>
 
