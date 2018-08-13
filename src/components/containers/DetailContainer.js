@@ -71,6 +71,11 @@ class DetailContainer extends Component {
     fetch(annotationUrl, postConfig)
       .then(response => response.json())
       .then(data => console.log(data))
+      .then(data => this.setState({
+        headline: "",
+        sourceLink: "",
+        content: "",
+      }))
       .catch(error => console.log(error));
   }
 
