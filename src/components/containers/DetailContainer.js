@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
+// const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
+const annotationUrl = "http://localhost:4000/annotations";
 
 
 
@@ -23,14 +24,17 @@ class DetailContainer extends Component {
 
   onAnnotationSubmit = (event) => {
     event.preventDefault();
-    console.log("You submitted an annotation!")
-    console.log("Currently selected artwork", this.props.selectedArtwork)
+    // console.log("You submitted an annotation!")
+    // console.log("Currently selected artwork", this.props.selectedArtwork)
 
     let submissionBody = {
       artwork: [this.props.selectedArtwork],
+      user: null,
       headline: this.state.headline,
       source: this.state.sourceLink,
       content: this.state.content,
+      xCoord: this.state.xCoord,
+      yCoord: this.state.yCoord,
     }
 
     console.log("Submission body", submissionBody)
@@ -43,10 +47,12 @@ class DetailContainer extends Component {
        body: JSON.stringify(submissionBody)
     }
 
-    // fetch(annotationUrl, postConfig)
-    //   .then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(error => console.log(error));
+    console.log("posConfig: ", postConfig);
+
+    fetch(annotationUrl, postConfig)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
 
   }
 
