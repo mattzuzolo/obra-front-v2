@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import AnnotationCard from "../AnnotationCard"
+
+
 // const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
 const annotationUrl = "http://localhost:4000/annotations";
 
@@ -17,8 +20,24 @@ class DetailContainer extends Component {
         xCoord: 0,
         yCoord: 0,
         displayingMarker: false,
+        annotationArray: [],
     }
 
+  }
+
+  componentDidMount(){
+    fetch(annotationUrl)
+      .then(response => response.json())
+      .then(data => this.filterAnnotationsByArtwork(data.annotations))
+  }
+
+  filterAnnotationsByArtwork = (annotationData) => {
+    // console.log("Annotations in filter method:", annotationData)
+    // console.log("FETCHED art: ", annotationData[0].artwork);
+    // console.log("SELECTED art: ", this.props.selectedArtwork._id)
+    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork == this.props.selectedArtwork._id);
+    // console.log("Filtered anotations", filteredAnnotations);
+    this.setState({ annotationArray: filteredAnnotations })
   }
 
 
@@ -54,6 +73,7 @@ class DetailContainer extends Component {
       .then(data => console.log(data))
       .catch(error => console.log(error));
 
+
   }
 
   onInputChange = (event) => {
@@ -74,7 +94,10 @@ class DetailContainer extends Component {
       yCoord: yCoord,
       displayingMarker: true,
     })
+  }
 
+  onAnnotationCardClick = (event) => {
+    console.log("You clicked an annotation!!!")
   }
 
 
@@ -121,6 +144,21 @@ class DetailContainer extends Component {
 
           <button>Submit annotation</button>
         </form>
+
+        <div>
+          {this.state.annotationArray.map(individualAnnotation => (
+            <AnnotationCard
+              annotation={individualAnnotation}
+              key={individualAnnotation._id}
+              id={individualAnnotation._id}
+              headline={individualAnnotation.headline}
+              source={individualAnnotation.source}
+              content={individualAnnotation.content}
+              onAnnotationCardClick={this.onAnnotationCardClick}
+            />
+          ))}
+        </div>
+
       </div>
     )
   }
