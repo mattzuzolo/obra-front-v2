@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 
 class LoginContainer extends Component {
   constructor(props){
@@ -23,6 +25,7 @@ class LoginContainer extends Component {
       .then(response => response.json())
       // .then(data => console.log("users GET", data))
       .then(data => this.findUser(data))
+      .then(foundUser => this.props.loginUser(foundUser))
       .catch(error => console.log ("ERROR DURING FETCH: ", error))
   }
 
@@ -30,7 +33,7 @@ class LoginContainer extends Component {
     let foundUser = data.users.find(indivdualUser => indivdualUser.username == this.state.username);
 
     if (!foundUser){
-      return alert("Failed to login");
+      throw new Error("Login attempt failed.");
     }
     return foundUser;
   }
@@ -54,4 +57,18 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+function mapStateToProps(state){
+  return {
+    loggedInUser: state.loggedInUser,
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    loginUser: (user => {
+      dispatch({type: "LOGIN_USER", payload: user})
+    }),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -1,6 +1,7 @@
 const defaultState = {
   artworkArray: [],
   selectedArtwork: {},
+  loggedInUser: {},
 }
 
 export default function(state = defaultState, action) {
@@ -14,6 +15,9 @@ export default function(state = defaultState, action) {
 
     case "SELECT_ARTWORK":
       return {...state, selectedArtwork: action.payload}
+
+    case "LOGIN_USER":
+      return {...state, loggedInUser: action.payload}
 
     default:
       return state
