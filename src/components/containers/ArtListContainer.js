@@ -5,6 +5,7 @@ import ArtCard from "../ArtCard"
 class ArtListContainer extends Component {
 
   onClickArtwork = (event, selectedArtwork) => {
+    
     this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.apiId}`)
     this.props.selectArtwork(selectedArtwork);
   }
