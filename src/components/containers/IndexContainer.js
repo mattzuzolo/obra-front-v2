@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtListContainer from "./ArtListContainer"
 
+import $ from 'jquery';
+
 class IndexContainer extends Component {
     constructor(props){
       super(props);
@@ -28,6 +30,33 @@ class IndexContainer extends Component {
     event.preventDefault();
     let submittedQuery = this.state.activeQuery;
     this.setState({submittedQuery});
+
+    //External api access:
+    // let searchQuery = submittedQuery
+    let searchQuery = "rabbit"
+    var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
+    var queryString = $.param({
+        apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
+        title: submittedQuery,
+        classification: "Paintings"
+    });
+
+    fetch(apiEndpointBaseURL + "?" + queryString)
+      .then(response => response.json())
+      // .then(data => console.log("Data from fetch", data))
+      .then(data => filterForImageLinkPresent(data.records))
+      .then(dataArray => this.props.updateArtworkArray(dataArray))
+
+    // console.log("searchQuery", searchQuery)
+    // console.log("apiEndpointBaseURL", apiEndpointBaseURL)
+    // console.log("queryString", queryString)
+
+
+
+
+
+
+
   }
 
   render(){
@@ -60,6 +89,10 @@ function mapDispatchToProps(dispatch){
       dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: testString})
     },
   }
+}
+
+let filterForImageLinkPresent = (data) => {
+  return data.filter(individualWork => individualWork.primaryimageurl !== null )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);

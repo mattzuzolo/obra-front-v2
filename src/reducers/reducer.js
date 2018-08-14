@@ -6,9 +6,17 @@ const defaultState = {
 
 export default function(state = defaultState, action) {
 
+
+
   switch(action.type){
     case "UPDATE_ARTWORK_ARRAY":
-      return {...state, artworkArray: [...state.artworkArray, ...action.payload.artwork]}
+
+      //if statement grabs internal api data
+      // if (action.payload.artwork){
+      //   return {...state, artworkArray: [...state.artworkArray, ...action.payload.artwork]}
+      // }
+      return {...state, artworkArray: [...state.artworkArray, ...action.payload]}
+
 
     case "CHANGE_MESSAGE":
       return {testString: action.payload}

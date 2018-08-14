@@ -20,7 +20,8 @@ class ArtListContainer extends Component {
             id={individualCard.apiId}
             title={individualCard.title}
             artist={individualCard.artist}
-            imageUrl={individualCard.imageUrl}
+
+            imageUrl={individualCard.primaryimageurl}
             onClickArtwork={this.onClickArtwork}
           />
         ))}
@@ -52,3 +53,6 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
+
+
+// {/* imageUrl={individualCard.imageUrl} */}
