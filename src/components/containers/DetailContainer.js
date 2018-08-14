@@ -71,28 +71,52 @@ class DetailContainer extends Component {
       yCoord: this.state.yCoord,
     }
 
-    let postConfig = {
-       method: "POST",
-       headers: {
-         "Content-type": "application/json"
-       },
-       body: JSON.stringify(submissionBody)
-    }
+    // let postConfig = {
+    //    method: "POST",
+    //    headers: {
+    //      "Content-type": "application/json"
+    //    },
+    //    body: JSON.stringify(submissionBody)
+    // }
 
     fetch(artworkUrl, artworkPostConfig)
       .then(response => response.json())
-      .then(data => console.log("POST artwork response:", data))
+      // .then(data => console.log("POST artwork response:", data))
+      .then(artworkData => annotationPost(artworkData))
+      .then(annotationResponse => annotationResponse.json())
+      .then(annotationResponse => console.log("annotationResponse", annotationResponse))
       .catch(error => console.log(error))
 
-    fetch(annotationUrl, postConfig)
-      .then(response => response.json())
-      .then(data => this.setState({
-        headline: "",
-        sourceLink: "",
-        content: "",
-        annotationArray: [...this.state.annotationArray, data]
-      }))
-      .catch(error => console.log(error));
+    let annotationPost = (artworkData) => {
+
+      let submissionBody = {
+        artwork: [artworkData],
+        user: [this.props.loggedInUser],
+        headline: this.state.headline,
+        source: this.state.sourceLink,
+        content: this.state.content,
+        xCoord: this.state.xCoord,
+        yCoord: this.state.yCoord,
+      }
+
+      let postConfig = {
+         method: "POST",
+         headers: {
+           "Content-type": "application/json"
+         },
+         body: JSON.stringify(submissionBody)
+      }
+      return fetch(annotationUrl, postConfig)
+    }
+    // fetch(annotationUrl, postConfig)
+    //   .then(response => response.json())
+    //   .then(data => this.setState({
+    //     headline: "",
+    //     sourceLink: "",
+    //     content: "",
+    //     annotationArray: [...this.state.annotationArray, data]
+    //   }))
+    //   .catch(error => console.log(error));
   }
 
   onInputChange = (event) => {
