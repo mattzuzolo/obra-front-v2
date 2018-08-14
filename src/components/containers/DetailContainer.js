@@ -153,7 +153,7 @@ class DetailContainer extends Component {
                       ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
                       : null
             }
-          <img src={this.props.selectedArtwork.imageUrl} alt="" onClick={this.onArtworkClick}></img>
+          <img src={this.props.selectedArtwork.primaryimageurl} alt="" onClick={this.onArtworkClick}></img>
         </div>
 
         <h1>{this.props.selectedArtwork.title}</h1>
