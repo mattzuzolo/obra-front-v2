@@ -5,6 +5,7 @@ import AnnotationCard from "../AnnotationCard"
 
 // const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
 const annotationUrl = "http://localhost:4000/annotations";
+const artworkUrl = "http://localhost:4000/artwork"
 
 class DetailContainer extends Component {
   constructor(props){
@@ -37,6 +38,30 @@ class DetailContainer extends Component {
   onAnnotationSubmit = (event) => {
     event.preventDefault();
 
+    let artworkSubmission = {
+      title: this.props.selectedArtwork.title,
+      artist: this.props.selectedArtwork.artist,
+      medium: this.props.selectedArtwork.medium,
+      century: this.props.selectedArtwork.century,
+      culture: this.props.selectedArtwork.century.culture,
+      url: this.props.selectedArtwork.url,
+      imageUrl: this.props.selectedArtwork.primaryimageurl,
+      apiId: this.props.selectedArtwork.id,
+    }
+
+    let artworkPostConfig = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(artworkSubmission)
+    }
+
+    fetch(artworkUrl, artworkPostConfig)
+      .then(response => response.json())
+      .then(data => console.log("POST artwork response:", data))
+      .catch(error => console.log(error))
+
     let submissionBody = {
       artwork: [this.props.selectedArtwork],
       user: [this.props.loggedInUser],
@@ -55,16 +80,16 @@ class DetailContainer extends Component {
        body: JSON.stringify(submissionBody)
     }
 
-    fetch(annotationUrl, postConfig)
-      .then(response => response.json())
-      .then(data => console.log("New annotation ID", data))
-      .then(data => this.setState({
-        headline: "",
-        sourceLink: "",
-        content: "",
-        annotationArray: [...this.state.annotationArray, data]
-      }))
-      .catch(error => console.log(error));
+    // fetch(annotationUrl, postConfig)
+    //   .then(response => response.json())
+    //   .then(data => console.log("New annotation ID", data))
+    //   .then(data => this.setState({
+    //     headline: "",
+    //     sourceLink: "",
+    //     content: "",
+    //     annotationArray: [...this.state.annotationArray, data]
+    //   }))
+    //   .catch(error => console.log(error));
   }
 
   onInputChange = (event) => {
