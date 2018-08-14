@@ -38,6 +38,9 @@ class DetailContainer extends Component {
   onAnnotationSubmit = (event) => {
     event.preventDefault();
 
+    //Check if artwork exists in db.
+    //add validations in backend to prevent duplicate apiId
+
     let artworkSubmission = {
       title: this.props.selectedArtwork.title,
       artist: this.props.selectedArtwork.artist,
@@ -57,10 +60,6 @@ class DetailContainer extends Component {
       body: JSON.stringify(artworkSubmission)
     }
 
-    fetch(artworkUrl, artworkPostConfig)
-      .then(response => response.json())
-      .then(data => console.log("POST artwork response:", data))
-      .catch(error => console.log(error))
 
     let submissionBody = {
       artwork: [this.props.selectedArtwork],
@@ -80,16 +79,20 @@ class DetailContainer extends Component {
        body: JSON.stringify(submissionBody)
     }
 
-    // fetch(annotationUrl, postConfig)
-    //   .then(response => response.json())
-    //   .then(data => console.log("New annotation ID", data))
-    //   .then(data => this.setState({
-    //     headline: "",
-    //     sourceLink: "",
-    //     content: "",
-    //     annotationArray: [...this.state.annotationArray, data]
-    //   }))
-    //   .catch(error => console.log(error));
+    fetch(artworkUrl, artworkPostConfig)
+      .then(response => response.json())
+      .then(data => console.log("POST artwork response:", data))
+      .catch(error => console.log(error))
+
+    fetch(annotationUrl, postConfig)
+      .then(response => response.json())
+      .then(data => this.setState({
+        headline: "",
+        sourceLink: "",
+        content: "",
+        annotationArray: [...this.state.annotationArray, data]
+      }))
+      .catch(error => console.log(error));
   }
 
   onInputChange = (event) => {
