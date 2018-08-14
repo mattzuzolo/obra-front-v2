@@ -2,12 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtCard from "../ArtCard"
 
+const artworkUrl = "http://localhost:4000/artwork";
+
 class ArtListContainer extends Component {
 
+
   onClickArtwork = (event, selectedArtwork) => {
-    
+
+    console.log("artwork", selectedArtwork)
+
+    fetch(`http://localhost:4000/artwork/`)
+      .then(response => response.json())
+      .then(data => findArtworkById(data.artwork, selectedArtwork))
+      .then(foundWork => {
+        if(foundWork){
+          return this.props.selectArtwork(foundWork);
+        }
+        else {
+          return this.props.selectArtwork(selectedArtwork);
+        }
+      })
+      .catch(console.error)
+
+      console.log("Clicked artwork before push", )
+
     this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.apiId}`)
-    this.props.selectArtwork(selectedArtwork);
+    // this.props.selectArtwork(selectedArtwork);
   }
 
   render(){
@@ -51,6 +71,12 @@ function mapDispatchToProps(dispatch){
       dispatch({type: "SELECT_ARTWORK", payload: chosenArtwork})
     }
   }
+}
+
+function findArtworkById(fetchedArray, selectedArtwork){
+  console.log("findArtworkById fetchedArray", typeof fetchedArray[0].apiId)
+  console.log("findArtworkById selectedArtwork", typeof selectedArtwork.id)
+  return fetchedArray.find(individualArtwork => individualArtwork.apiId == selectedArtwork.id)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
