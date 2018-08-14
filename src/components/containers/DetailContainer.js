@@ -80,12 +80,29 @@ class DetailContainer extends Component {
     // }
 
     fetch(artworkUrl, artworkPostConfig)
+      .then(response => {
+        if (!response.ok){
+          throw new Error("This artwork already exists sent in throw error")
+        }
+        else {
+          return response
+        }
+      })
       .then(response => response.json())
-      // .then(data => console.log("POST artwork response:", data))
-      .then(artworkData => annotationPost(artworkData))
-      .then(annotationResponse => annotationResponse.json())
-      .then(annotationResponse => console.log("annotationResponse", annotationResponse))
-      .catch(error => console.log(error))
+      // .then(artworkData => annotationPost(artworkData))
+      // .then(annotationResponse => annotationResponse.json())
+      // .then(annotationResponse => console.log("annotationResponse", annotationResponse))
+      .catch(error => {
+        if (error === "This artwork already exists - send in the front end"){
+          fetch(artworkUrl)
+            .then(response => response.json())
+            .then(data => console.log("That artwork already exists. Here's a list of artwork", data))
+            .catch(error => console.log("Error with GET"))
+        }
+        else {
+          console.log(error)
+        }
+      })
 
     let annotationPost = (artworkData) => {
 
