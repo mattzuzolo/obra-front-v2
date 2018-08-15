@@ -7,11 +7,11 @@ const defaultState = {
 export default function(state = defaultState, action) {
 
 
-
   switch(action.type){
     case "UPDATE_ARTWORK_ARRAY":
-      return {...state, artworkArray: [...state.artworkArray, ...action.payload]}
-
+      //not ideal to clear state in this way:
+      return {...state, artworkArray: [...action.payload]}
+      // return {...state, artworkArray: [...state.artworkArray, ...action.payload]}
 
     case "CHANGE_MESSAGE":
       return {testString: action.payload}
