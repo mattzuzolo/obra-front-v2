@@ -14,11 +14,11 @@ class IndexContainer extends Component {
       }
     }
 
-  componentDidMount(){
-    fetch("http://localhost:4000/artwork")
-      .then(response => response.json())
-      .then(data => this.props.updateArtworkArray(data.artwork));
-  }
+  // componentDidMount(){
+  //   fetch("http://localhost:4000/artwork")
+  //     .then(response => response.json())
+  //     .then(data => this.props.updateArtworkArray(data.artwork));
+  // }
 
   onQueryChange = (event) => {
     this.setState({ activeQuery: event.target.value })
@@ -49,6 +49,7 @@ class IndexContainer extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <input placeholder="search for art here" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
           <button>Click me for art</button>
+
         </form>
 
         <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />

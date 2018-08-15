@@ -24,9 +24,9 @@ class App extends Component {
           <Switch>
 
             <Route path ={`/artwork/:id`} render={(routerProps) => {
-                let id = routerProps.match.params.id;
-                let foundArtwork = this.props.artworkArray.find((art) => art.id === parseInt(id, 10));
-                return <DetailContainer selectedArtwork={foundArtwork}/>
+                // let id = routerProps.match.params.id;
+                // let foundArtwork = this.props.artworkArray.find((art) => art.id === parseInt(id, 10));
+                return <DetailContainer/>
               }} />
 
             <Route path="/artwork" render={(routerProps) => <IndexContainer

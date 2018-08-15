@@ -10,11 +10,6 @@ export default function(state = defaultState, action) {
 
   switch(action.type){
     case "UPDATE_ARTWORK_ARRAY":
-
-      //if statement grabs internal api data
-      // if (action.payload.artwork){
-      //   return {...state, artworkArray: [...state.artworkArray, ...action.payload.artwork]}
-      // }
       return {...state, artworkArray: [...state.artworkArray, ...action.payload]}
 
 

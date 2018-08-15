@@ -6,6 +6,7 @@ class ArtListContainer extends Component {
 
   onClickArtwork = (event, selectedArtwork) => {
 
+    //check to see if artwork exists in internal database
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
       .then(data => findArtworkById(data.artwork, selectedArtwork))
@@ -19,8 +20,8 @@ class ArtListContainer extends Component {
       })
       .catch(console.error)
 
+      //id only works when not in my db. Still can't directly access it though
     this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.id}`)
-    // this.props.selectArtwork(selectedArtwork);
   }
 
   render(){
@@ -34,7 +35,6 @@ class ArtListContainer extends Component {
             id={individualCard.id}
             title={individualCard.title}
             artist={individualCard.artist}
-
             primaryimageurl={individualCard.primaryimageurl}
             onClickArtwork={this.onClickArtwork}
           />
@@ -48,7 +48,7 @@ class ArtListContainer extends Component {
 function mapStateToProps(state){
   return {
     artworkArray: state.artworkArray,
-    // selectedArtwork: state.selectedArtwork,
+    selectedArtwork: state.selectedArtwork,
   }
 }
 
@@ -56,9 +56,6 @@ function mapDispatchToProps(dispatch){
   return {
     updateArtworkArray: (artworkArray => {
       dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: artworkArray})
-    }),
-    updateTestString: (newString => {
-      dispatch({type: "CHANGE_MESSAGE", payload: newString})
     }),
     selectArtwork: (chosenArtwork) => {
       dispatch({type: "SELECT_ARTWORK", payload: chosenArtwork})
@@ -71,6 +68,3 @@ function findArtworkById(fetchedArray, selectedArtwork){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
-
-
-// {/* imageUrl={individualCard.imageUrl} */}
