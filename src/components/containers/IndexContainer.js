@@ -26,19 +26,18 @@ class IndexContainer extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
+
     let submittedQuery = this.state.activeQuery;
-    this.setState({submittedQuery});
 
     var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
     var queryString = $.param({
         apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
-        title: "rabbit",
+        title: submittedQuery,
         classification: "Paintings"
     });
 
     fetch(apiEndpointBaseURL + "?" + queryString)
       .then(response => response.json())
-      // .then(data => console.log("Data from fetch", data))
       .then(data => filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
   }
@@ -46,15 +45,17 @@ class IndexContainer extends Component {
   render(){
     return(
       <div className="container div--index-container">
+
         <form onSubmit={this.handleFormSubmit}>
           <input placeholder="search for art here" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
           <button>Click me for art</button>
-          <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />
         </form>
+
+        <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />
+
       </div>
     );
   }
-
 }
 
 function mapStateToProps(state){
