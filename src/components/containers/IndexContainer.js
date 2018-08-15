@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ArtListContainer from "./ArtListContainer"
-
+import ArtListContainer from "./ArtListContainer";
 import $ from 'jquery';
 
 class IndexContainer extends Component {
@@ -15,49 +14,47 @@ class IndexContainer extends Component {
     }
 
   componentDidMount(){
-    // fetch("https://agile-anchorage-40481.herokuapp.com/artwork")
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
       .then(data => this.props.updateArtworkArray(data))
-      // .then(() => this.props.updateTestString("This string is being updated in IndexContainer's ComponentDidMount"))
   }
 
   onQueryChange = (event) => {
     this.setState({ activeQuery: event.target.value })
   }
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
-    let submittedQuery = this.state.activeQuery;
-    this.setState({submittedQuery});
-
-    //External api access:
-    // let searchQuery = submittedQuery
-    let searchQuery = "rabbit"
-    var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
-    var queryString = $.param({
-        apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
-        title: submittedQuery,
-        classification: "Paintings"
-    });
-
-    fetch(apiEndpointBaseURL + "?" + queryString)
-      .then(response => response.json())
-      // .then(data => console.log("Data from fetch", data))
-      .then(data => filterForImageLinkPresent(data.records))
-      .then(dataArray => this.props.updateArtworkArray(dataArray))
-
-    // console.log("searchQuery", searchQuery)
-    // console.log("apiEndpointBaseURL", apiEndpointBaseURL)
-    // console.log("queryString", queryString)
-
-
-
-
-
-
-
-  }
+  // handleFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   let submittedQuery = this.state.activeQuery;
+  //   this.setState({submittedQuery});
+  //
+  //   //External api access:
+  //   // let searchQuery = submittedQuery
+  //   // let searchQuery = "rabbit"
+  //   var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
+  //   var queryString = $.param({
+  //       apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
+  //       title: submittedQuery,
+  //       classification: "Paintings"
+  //   });
+  //
+  //   fetch(apiEndpointBaseURL + "?" + queryString)
+  //     .then(response => response.json())
+  //     // .then(data => console.log("Data from fetch", data))
+  //     .then(data => filterForImageLinkPresent(data.records))
+  //     .then(dataArray => this.props.updateArtworkArray(dataArray))
+  //
+  //   // console.log("searchQuery", searchQuery)
+  //   // console.log("apiEndpointBaseURL", apiEndpointBaseURL)
+  //   // console.log("queryString", queryString)
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // }
 
   render(){
     return(
@@ -76,7 +73,6 @@ class IndexContainer extends Component {
 function mapStateToProps(state){
   return {
     artworkArray: state.artworkArray,
-    testString: state.testString,
   }
 }
 
@@ -85,14 +81,7 @@ function mapDispatchToProps(dispatch){
     updateArtworkArray: (dataArray) => {
       dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: dataArray})
     },
-    updateTestString: (testString) => {
-      dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: testString})
-    },
   }
-}
-
-let filterForImageLinkPresent = (data) => {
-  return data.filter(individualWork => individualWork.primaryimageurl !== null )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);

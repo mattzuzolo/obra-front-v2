@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtCard from "../ArtCard"
 
-const artworkUrl = "http://localhost:4000/artwork";
-
 class ArtListContainer extends Component {
 
-
   onClickArtwork = (event, selectedArtwork) => {
-
-    console.log("artwork", selectedArtwork)
 
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
@@ -76,7 +71,7 @@ function mapDispatchToProps(dispatch){
 function findArtworkById(fetchedArray, selectedArtwork){
   console.log("findArtworkById fetchedArray", typeof fetchedArray[0].apiId)
   console.log("findArtworkById selectedArtwork", typeof selectedArtwork.id)
-  return fetchedArray.find(individualArtwork => individualArtwork.apiId == selectedArtwork.id)
+  return fetchedArray.find(individualArtwork => individualArtwork.apiId === selectedArtwork.id, 10)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
