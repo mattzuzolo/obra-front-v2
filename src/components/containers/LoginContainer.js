@@ -19,12 +19,11 @@ class LoginContainer extends Component {
 
   onLoginSubmit = (event) => {
     event.preventDefault();
-
     fetch("http://localhost:4000/users")
       .then(response => response.json())
       .then(data => this.findUser(data))
       .then(foundUser => this.props.loginUser(foundUser))
-      .catch(error => console.log ("ERROR DURING FETCH: ", error))
+      .catch(error => console.log("ERROR DURING FETCH: ", error))
   }
 
   findUser = (data) => {

@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 
 import AnnotationCard from "../AnnotationCard"
 
-// const annotationUrl = "https://agile-anchorage-40481.herokuapp.com/annotations";
 const annotationUrl = "http://localhost:4000/annotations";
-const artworkUrl = "http://localhost:4000/artwork"
 
 class DetailContainer extends Component {
   constructor(props){
@@ -20,7 +18,6 @@ class DetailContainer extends Component {
         displayingMarker: false,
         annotationArray: [],
     }
-
   }
 
   componentDidMount(){
@@ -30,76 +27,76 @@ class DetailContainer extends Component {
   }
 
   filterAnnotationsByArtwork = (annotationData) => {
-    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork == this.props.selectedArtwork._id);
+    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork === parseInt(this.props.selectedArtwork._id, 10));
     this.setState({ annotationArray: filteredAnnotations })
   }
 
 
   onAnnotationSubmit = (event) => {
-    event.preventDefault();
-    console.log("you clicked the annotation button")
-
-    let submissionBody = {
-      artwork: [this.props.selectedArtwork],
-      user: [this.props.loggedInUser],
-      headline: this.state.headline,
-      source: this.state.sourceLink,
-      content: this.state.content,
-      xCoord: this.state.xCoord,
-      yCoord: this.state.yCoord,
-    }
-
-    let postConfig = {
-       method: "POST",
-       headers: {
-         "Content-type": "application/json"
-       },
-       body: JSON.stringify({
-         artwork: [this.props.selectedArtwork],
-         user: [this.props.loggedInUser],
-         headline: this.state.headline,
-         source: this.state.sourceLink,
-         content: this.state.content,
-         xCoord: this.state.xCoord,
-         yCoord: this.state.yCoord,
-       })
-    }
-
-    let artworkPostConfig = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        title: this.props.selectedArtwork.title,
-        artist: this.props.selectedArtwork.artist,
-        medium: this.props.selectedArtwork.medium,
-        century: this.props.selectedArtwork.century,
-        culture: this.props.selectedArtwork.culture,
-        url: this.props.selectedArtwork.url,
-        imageUrl: this.props.selectedArtwork.primaryimageurl,
-        apiId: this.props.selectedArtwork.id,
-      })
-    }
-
-    // console.log("submissionBody", submissionBody);
-    // console.log("postConfig", postConfig)
-
-    // fetch(annotationUrl, postConfig)
-    //   .then(response => response.json())
-    //   .then(data => console.log("POST data", data))
-
-    fetch(artworkUrl, artworkPostConfig)
-      .then(artworkResponse => artworkResponse.json())
-      // .then(artworkResponse => console.log("Artwork response:", artworkResponse))
-      // .then(data => console.log("POSTED artwork", data))
-      .then(data => annotationFetch([this.props.loggedInUser], data))
-      .then(annotationResponse => annotationResponse.json())
-      .then(dataTwo => console.log("Posted annotation", dataTwo))
+    // event.preventDefault();
+    // console.log("you clicked the annotation button")
+    //
+    // let submissionBody = {
+    //   artwork: [this.props.selectedArtwork],
+    //   user: [this.props.loggedInUser],
+    //   headline: this.state.headline,
+    //   source: this.state.sourceLink,
+    //   content: this.state.content,
+    //   xCoord: this.state.xCoord,
+    //   yCoord: this.state.yCoord,
+    // }
+    //
+    // let postConfig = {
+    //    method: "POST",
+    //    headers: {
+    //      "Content-type": "application/json"
+    //    },
+    //    body: JSON.stringify({
+    //      artwork: [this.props.selectedArtwork],
+    //      user: [this.props.loggedInUser],
+    //      headline: this.state.headline,
+    //      source: this.state.sourceLink,
+    //      content: this.state.content,
+    //      xCoord: this.state.xCoord,
+    //      yCoord: this.state.yCoord,
+    //    })
+    // }
+    //
+    // let artworkPostConfig = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     title: this.props.selectedArtwork.title,
+    //     artist: this.props.selectedArtwork.artist,
+    //     medium: this.props.selectedArtwork.medium,
+    //     century: this.props.selectedArtwork.century,
+    //     culture: this.props.selectedArtwork.culture,
+    //     url: this.props.selectedArtwork.url,
+    //     imageUrl: this.props.selectedArtwork.primaryimageurl,
+    //     id: this.props.selectedArtwork.id,
+    //   })
+    // }
+    //
+    // // console.log("submissionBody", submissionBody);
+    // // console.log("postConfig", postConfig)
+    //
+    // // fetch(annotationUrl, postConfig)
+    // //   .then(response => response.json())
+    // //   .then(data => console.log("POST data", data))
+    //
+    // fetch(artworkUrl, artworkPostConfig)
+    //   .then(artworkResponse => artworkResponse.json())
+    //   // .then(artworkResponse => console.log("Artwork response:", artworkResponse))
+    //   // .then(data => console.log("POSTED artwork", data))
+    //   .then(data => annotationFetch([this.props.loggedInUser], data))
+    //   .then(annotationResponse => annotationResponse.json())
+    //   .then(dataTwo => console.log("Posted annotation", dataTwo))
 
 
     //Check if artwork exists in db.
-    //add validations in backend to prevent duplicate apiId
+    //add validations in backend to prevent duplicate id
     //
     // let artworkSubmission = {
     //   title: this.props.selectedArtwork.title,
@@ -109,7 +106,7 @@ class DetailContainer extends Component {
     //   culture: this.props.selectedArtwork.century.culture,
     //   url: this.props.selectedArtwork.url,
     //   imageUrl: this.props.selectedArtwork.primaryimageurl,
-    //   apiId: this.props.selectedArtwork.id,
+    //   id: this.props.selectedArtwork.id,
     // }
 
     // let artworkPostConfig = {
@@ -125,7 +122,7 @@ class DetailContainer extends Component {
     //     culture: this.props.selectedArtwork.century.culture,
     //     url: this.props.selectedArtwork.url,
     //     imageUrl: this.props.selectedArtwork.primaryimageurl,
-    //     apiId: this.props.selectedArtwork.id,
+    //     id: this.props.selectedArtwork.id,
     //   })
     // }
 
@@ -225,7 +222,7 @@ class DetailContainer extends Component {
   }
 
   onAnnotationCardPut = (event, individualAnnotation) => {
-    let urlWithId = annotationUrl + "/" + individualAnnotation._id
+    // let urlWithId = annotationUrl + "/" + individualAnnotation._id
     // console.log("annotation on render", individualAnnotation)
 
     // let submissionBody = {
@@ -273,7 +270,7 @@ class DetailContainer extends Component {
       position: "absolute",
     }
 
-    // console.log("Annotation array at render", this.state.annotationArray)
+    console.log("Annotation array at render", this.props.selectedArtwork)
     return(
       <div>
         <div id="annotation-zone"  >
@@ -281,13 +278,7 @@ class DetailContainer extends Component {
                       ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
                       : null
             }
-
-            { this.props.selectedArtwork.imageUrl
-                      ? <img src={this.props.selectedArtwork.imageUrl} alt="" onClick={this.onArtworkClick}></img>
-                      : <img src={this.props.selectedArtwork.primaryimageurl} alt="" onClick={this.onArtworkClick}></img>
-            }
-
-
+            <img src={this.props.selectedArtwork.primaryimageurl}></img>
         </div>
 
         <h1>{this.props.selectedArtwork.title}</h1>
@@ -346,24 +337,24 @@ export default connect(mapStateToProps)(DetailContainer);
 
 // <img src={this.props.selectedArtwork.primaryimageurl} alt="" onClick={this.onArtworkClick}></img>
 
-
-
-function annotationFetch(currentUser, data){
-
-  console.log("Data value in fetch function", data)
-
-  let annotationPost = {...data, user: currentUser}
-
-  let postConfig = {
-     method: "POST",
-     headers: {
-       "Content-type": "application/json"
-     },
-     body: JSON.stringify(annotationPost)
-  }
-
-  console.log("Annotation url before fetch", annotationUrl)
-  console.log("postConfig before fetch", postConfig)
-
-  return fetch(annotationUrl, postConfig)
-}
+//
+//
+// function annotationFetch(currentUser, data){
+//
+//   console.log("Data value in fetch function", data)
+//
+//   let annotationPost = {...data, user: currentUser}
+//
+//   let postConfig = {
+//      method: "POST",
+//      headers: {
+//        "Content-type": "application/json"
+//      },
+//      body: JSON.stringify(annotationPost)
+//   }
+//
+//   console.log("Annotation url before fetch", annotationUrl)
+//   console.log("postConfig before fetch", postConfig)
+//
+//   return fetch(annotationUrl, postConfig)
+// }

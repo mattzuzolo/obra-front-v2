@@ -15,10 +15,7 @@ import LoginContainer from "./components/containers/LoginContainer";
 
 class App extends Component {
 
-  // handleClick = () => {
-  //   console.log('hello')
-  //   this.props.changeExampleMessage()
-  // }
+
 
   render() {
     return (
@@ -28,8 +25,8 @@ class App extends Component {
 
             <Route path ={`/artwork/:id`} render={(routerProps) => {
                 let id = routerProps.match.params.id;
-                let foundArtwork = this.props.artworkArray.find((art) => art.apiId === parseInt(id, 10));
-                return <DetailContainer />
+                let foundArtwork = this.props.artworkArray.find((art) => art.id === parseInt(id, 10));
+                return <DetailContainer selectedArtwork={foundArtwork}/>
               }} />
 
             <Route path="/artwork" render={(routerProps) => <IndexContainer

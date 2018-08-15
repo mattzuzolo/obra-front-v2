@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ArtListContainer from "./ArtListContainer"
-
 import $ from 'jquery';
+
+import ArtListContainer from "./ArtListContainer"
 
 class IndexContainer extends Component {
     constructor(props){
@@ -15,11 +15,9 @@ class IndexContainer extends Component {
     }
 
   componentDidMount(){
-    // fetch("https://agile-anchorage-40481.herokuapp.com/artwork")
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
-      .then(data => this.props.updateArtworkArray(data))
-      // .then(() => this.props.updateTestString("This string is being updated in IndexContainer's ComponentDidMount"))
+      .then(data => this.props.updateArtworkArray(data.artwork));
   }
 
   onQueryChange = (event) => {
@@ -31,13 +29,10 @@ class IndexContainer extends Component {
     let submittedQuery = this.state.activeQuery;
     this.setState({submittedQuery});
 
-    //External api access:
-    // let searchQuery = submittedQuery
-    let searchQuery = "rabbit"
     var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
     var queryString = $.param({
         apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
-        title: submittedQuery,
+        title: "rabbit",
         classification: "Paintings"
     });
 
@@ -46,17 +41,6 @@ class IndexContainer extends Component {
       // .then(data => console.log("Data from fetch", data))
       .then(data => filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
-
-    // console.log("searchQuery", searchQuery)
-    // console.log("apiEndpointBaseURL", apiEndpointBaseURL)
-    // console.log("queryString", queryString)
-
-
-
-
-
-
-
   }
 
   render(){
@@ -65,7 +49,7 @@ class IndexContainer extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <input placeholder="search for art here" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
           <button>Click me for art</button>
-          <ArtListContainer routerProps={this.props.routerProps} />
+          <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />
         </form>
       </div>
     );
@@ -76,7 +60,6 @@ class IndexContainer extends Component {
 function mapStateToProps(state){
   return {
     artworkArray: state.artworkArray,
-    testString: state.testString,
   }
 }
 
@@ -84,9 +67,6 @@ function mapDispatchToProps(dispatch){
   return {
     updateArtworkArray: (dataArray) => {
       dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: dataArray})
-    },
-    updateTestString: (testString) => {
-      dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: testString})
     },
   }
 }

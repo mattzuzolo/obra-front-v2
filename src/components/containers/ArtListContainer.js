@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtCard from "../ArtCard"
 
-const artworkUrl = "http://localhost:4000/artwork";
-
 class ArtListContainer extends Component {
 
-
   onClickArtwork = (event, selectedArtwork) => {
-
-    console.log("artwork", selectedArtwork)
 
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
@@ -24,9 +19,7 @@ class ArtListContainer extends Component {
       })
       .catch(console.error)
 
-      console.log("Clicked artwork before push", )
-
-    this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.apiId}`)
+    this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.id}`)
     // this.props.selectArtwork(selectedArtwork);
   }
 
@@ -37,12 +30,12 @@ class ArtListContainer extends Component {
           <ArtCard
             className="artList"
             artwork={individualCard}
-            key={individualCard.apiId}
-            id={individualCard.apiId}
+            key={individualCard.id}
+            id={individualCard.id}
             title={individualCard.title}
             artist={individualCard.artist}
 
-            imageUrl={individualCard.primaryimageurl}
+            primaryimageurl={individualCard.primaryimageurl}
             onClickArtwork={this.onClickArtwork}
           />
         ))}
@@ -55,7 +48,7 @@ class ArtListContainer extends Component {
 function mapStateToProps(state){
   return {
     artworkArray: state.artworkArray,
-    selectedArtwork: state.selectedArtwork,
+    // selectedArtwork: state.selectedArtwork,
   }
 }
 
@@ -74,9 +67,7 @@ function mapDispatchToProps(dispatch){
 }
 
 function findArtworkById(fetchedArray, selectedArtwork){
-  console.log("findArtworkById fetchedArray", typeof fetchedArray[0].apiId)
-  console.log("findArtworkById selectedArtwork", typeof selectedArtwork.id)
-  return fetchedArray.find(individualArtwork => individualArtwork.apiId == selectedArtwork.id)
+  return fetchedArray.find(individualArtwork => individualArtwork.id === parseInt(selectedArtwork.id, 10))
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
