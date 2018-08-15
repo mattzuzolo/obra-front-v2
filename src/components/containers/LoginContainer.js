@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 class LoginContainer extends Component {
   constructor(props){
     super(props);
@@ -23,7 +22,6 @@ class LoginContainer extends Component {
 
     fetch("http://localhost:4000/users")
       .then(response => response.json())
-      // .then(data => console.log("users GET", data))
       .then(data => this.findUser(data))
       .then(foundUser => this.props.loginUser(foundUser))
       .catch(error => console.log ("ERROR DURING FETCH: ", error))
@@ -31,7 +29,6 @@ class LoginContainer extends Component {
 
   findUser = (data) => {
     let foundUser = data.users.find(indivdualUser => indivdualUser.username === this.state.username);
-
     if (!foundUser){
       throw new Error("Login attempt failed.");
     }
@@ -39,8 +36,6 @@ class LoginContainer extends Component {
   }
 
   render(){
-    console.log("State on render", this.state)
-
     return(
       <div>
       <form onSubmit={this.onLoginSubmit}>

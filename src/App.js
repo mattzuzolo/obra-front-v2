@@ -8,7 +8,6 @@ import NavBar from "./components/NavBar"
 import IndexContainer from "./components/containers/IndexContainer";
 import DetailContainer from "./components/containers/DetailContainer";
 import LoginContainer from "./components/containers/LoginContainer";
-import ProfileContainer from "./components/containers/ProfileContainer";
 
 
 // import { connect } from 'react-redux'
@@ -37,7 +36,6 @@ class App extends Component {
                 routerProps={routerProps} />}/>
 
             <Route path="/login" component={LoginContainer} />
-            <Route path="/profile" component={ProfileContainer} />
           </Switch>
       </div>
     );
