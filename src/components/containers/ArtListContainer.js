@@ -5,6 +5,7 @@ import ArtCard from "../ArtCard"
 class ArtListContainer extends Component {
 
   onClickArtwork = (event, selectedArtwork) => {
+<<<<<<< HEAD
 
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
@@ -21,8 +22,11 @@ class ArtListContainer extends Component {
 
       console.log("Clicked artwork before push", )
 
+=======
+    
+>>>>>>> parent of f399bea... almost got post working agian
     this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.apiId}`)
-    // this.props.selectArtwork(selectedArtwork);
+    this.props.selectArtwork(selectedArtwork);
   }
 
   render(){
@@ -68,12 +72,15 @@ function mapDispatchToProps(dispatch){
   }
 }
 
+<<<<<<< HEAD
 function findArtworkById(fetchedArray, selectedArtwork){
   console.log("findArtworkById fetchedArray", typeof fetchedArray[0].apiId)
   console.log("findArtworkById selectedArtwork", typeof selectedArtwork.id)
   return fetchedArray.find(individualArtwork => individualArtwork.apiId === selectedArtwork.id, 10)
 }
 
+=======
+>>>>>>> parent of f399bea... almost got post working agian
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
 
 

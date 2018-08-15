@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtListContainer from "./ArtListContainer";
-import $ from 'jquery';
+// import $ from 'jquery';
 
 class IndexContainer extends Component {
     constructor(props){

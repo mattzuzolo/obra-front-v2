@@ -35,9 +35,107 @@ class DetailContainer extends Component {
 
   onAnnotationSubmit = (event) => {
     event.preventDefault();
-    console.log("you clicked the annotation button")
+
+<<<<<<< HEAD
+
+=======
+    //Check if artwork exists in db.
+    //add validations in backend to prevent duplicate apiId
+
+    let artworkSubmission = {
+      title: this.props.selectedArtwork.title,
+      artist: this.props.selectedArtwork.artist,
+      medium: this.props.selectedArtwork.medium,
+      century: this.props.selectedArtwork.century,
+      culture: this.props.selectedArtwork.century.culture,
+      url: this.props.selectedArtwork.url,
+      imageUrl: this.props.selectedArtwork.primaryimageurl,
+      apiId: this.props.selectedArtwork.id,
+    }
+
+    let artworkPostConfig = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(artworkSubmission)
+    }
 
 
+    let submissionBody = {
+      artwork: [this.props.selectedArtwork],
+      user: [this.props.loggedInUser],
+      headline: this.state.headline,
+      source: this.state.sourceLink,
+      content: this.state.content,
+      xCoord: this.state.xCoord,
+      yCoord: this.state.yCoord,
+    }
+
+    // let postConfig = {
+    //    method: "POST",
+    //    headers: {
+    //      "Content-type": "application/json"
+    //    },
+    //    body: JSON.stringify(submissionBody)
+    // }
+
+    fetch(artworkUrl, artworkPostConfig)
+      .then(response => {
+        if (!response.ok){
+          throw new Error("This artwork already exists sent in throw error")
+        }
+        else {
+          return response
+        }
+      })
+      .then(response => response.json())
+      // .then(artworkData => annotationPost(artworkData))
+      // .then(annotationResponse => annotationResponse.json())
+      // .then(annotationResponse => console.log("annotationResponse", annotationResponse))
+      .catch(error => {
+        if (error === "This artwork already exists - send in the front end"){
+          fetch(artworkUrl)
+            .then(response => response.json())
+            .then(data => console.log("That artwork already exists. Here's a list of artwork", data))
+            .catch(error => console.log("Error with GET"))
+        }
+        else {
+          console.log(error)
+        }
+      })
+
+    let annotationPost = (artworkData) => {
+
+      let submissionBody = {
+        artwork: [artworkData],
+        user: [this.props.loggedInUser],
+        headline: this.state.headline,
+        source: this.state.sourceLink,
+        content: this.state.content,
+        xCoord: this.state.xCoord,
+        yCoord: this.state.yCoord,
+      }
+
+      let postConfig = {
+         method: "POST",
+         headers: {
+           "Content-type": "application/json"
+         },
+         body: JSON.stringify(submissionBody)
+      }
+      return fetch(annotationUrl, postConfig)
+    }
+    // fetch(annotationUrl, postConfig)
+    //   .then(response => response.json())
+    //   .then(data => this.setState({
+    //     headline: "",
+    //     sourceLink: "",
+    //     content: "",
+    //     annotationArray: [...this.state.annotationArray, data]
+    //   }))
+    //   .catch(error => console.log(error));
+>>>>>>> parent of f399bea... almost got post working agian
   }
 
   onInputChange = (event) => {
@@ -91,6 +189,10 @@ class DetailContainer extends Component {
       position: "absolute",
     }
 
+<<<<<<< HEAD
+=======
+    console.log("Annotation array at render", this.state.annotationArray)
+>>>>>>> parent of f399bea... almost got post working agian
     return(
       <div>
         <div id="annotation-zone"  >
@@ -98,13 +200,7 @@ class DetailContainer extends Component {
                       ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
                       : null
             }
-
-            { this.props.selectedArtwork.imageUrl
-                      ? <img src={this.props.selectedArtwork.imageUrl} alt="" onClick={this.onArtworkClick}></img>
-                      : <img src={this.props.selectedArtwork.primaryimageurl} alt="" onClick={this.onArtworkClick}></img>
-            }
-
-
+          <img src={this.props.selectedArtwork.primaryimageurl} alt="" onClick={this.onArtworkClick}></img>
         </div>
 
         <h1>{this.props.selectedArtwork.title}</h1>
@@ -154,3 +250,10 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(DetailContainer);
+<<<<<<< HEAD
+=======
+
+
+// {this.state.displayingMarker ? }
+// <div id="annotation-marker"></div>
+>>>>>>> parent of f399bea... almost got post working agian

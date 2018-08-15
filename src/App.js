@@ -16,7 +16,6 @@ class App extends Component {
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
       .then(localData => this.props.updateArtworkArray(localData))
-      // .then(data => this.props.updateArtworkArray(data))
   }
 
   render() {
@@ -57,4 +56,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
