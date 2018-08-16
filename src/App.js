@@ -9,13 +9,7 @@ import IndexContainer from "./components/containers/IndexContainer";
 import DetailContainer from "./components/containers/DetailContainer";
 import LoginContainer from "./components/containers/LoginContainer";
 
-
-// import { connect } from 'react-redux'
-// import { changeExampleMessage } from './actions'
-
 class App extends Component {
-
-
 
   render() {
     return (
