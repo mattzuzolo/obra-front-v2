@@ -12,13 +12,13 @@ class ArtListContainer extends Component {
       .then(data => findArtworkById(data.artwork, selectedArtwork))
       .then(foundWork => {
         if(foundWork){
-          console.log("This artwork was found")
+          // console.log("This artwork was found", foundWork)
           this.props.routerProps.history.push(`/artwork/${foundWork._id}`)
           return this.props.selectArtwork(foundWork);
         }
         else {
           this.props.selectArtwork(selectedArtwork);
-          console.log("This artwork was NOT found", this.props.selectedArtwork)
+          // console.log("This artwork was NOT found", this.props.selectedArtwork)
           this.props.routerProps.history.push(`/artwork/${selectedArtwork.id}`)
         }
       })

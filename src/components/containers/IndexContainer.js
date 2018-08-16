@@ -26,20 +26,24 @@ class IndexContainer extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-
     let submittedQuery = this.state.activeQuery;
+    // let apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
+    // let queryString = $.param({
+    //     // apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
+    //     title: submittedQuery,
+    //     classification: "Paintings"
+    // });
 
-    var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
-    var queryString = $.param({
-        apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
-        title: submittedQuery,
-        classification: "Paintings"
-    });
-
-    fetch(apiEndpointBaseURL + "?" + queryString)
+    // console.log("queryString:", queryString)
+    fetch(`http://localhost:4000/search/${submittedQuery}`)
       .then(response => response.json())
-      .then(data => filterForImageLinkPresent(data.records))
-      .then(dataArray => this.props.updateArtworkArray(dataArray))
+      .then(data => console.log("Query fetch response", data))
+      .catch(error => console.log("FETCH ERROR: ", error))
+
+    // fetch(apiEndpointBaseURL + "?" + queryString)
+    //   .then(response => response.json())
+    //   .then(data => filterForImageLinkPresent(data.records))
+    //   .then(dataArray => this.props.updateArtworkArray(dataArray))
   }
 
   render(){

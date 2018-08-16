@@ -236,7 +236,8 @@ function postAnnotationFetch(annotationPostSubmissionBody){
       },
       body: JSON.stringify(annotationPostSubmissionBody)
   }
-
+  console.log("Annotation submission body", annotationPostSubmissionBody);
+  console.log("Annotation postAnnotationConfig", postAnnotationConfig);
   // console.log("Config", postAnnotationConfig)
   // console.log("FETCH TRIGGERS HERE.")
   return fetch(annotationUrl, postAnnotationConfig);
