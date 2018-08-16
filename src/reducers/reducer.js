@@ -6,7 +6,6 @@ const defaultState = {
 
 export default function(state = defaultState, action) {
 
-
   switch(action.type){
     case "UPDATE_ARTWORK_ARRAY":
       //not ideal to clear state in this way:
