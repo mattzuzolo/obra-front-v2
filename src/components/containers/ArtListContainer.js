@@ -17,8 +17,9 @@ class ArtListContainer extends Component {
           return this.props.selectArtwork(foundWork);
         }
         else {
-          console.log("This artwork was NOT found")
-          return this.props.selectArtwork(selectedArtwork);
+          this.props.selectArtwork(selectedArtwork);
+          console.log("This artwork was NOT found", this.props.selectedArtwork)
+          this.props.routerProps.history.push(`/artwork/${selectedArtwork.id}`)
         }
       })
       .catch(console.error)
