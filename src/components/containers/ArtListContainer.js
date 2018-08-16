@@ -12,9 +12,11 @@ class ArtListContainer extends Component {
       .then(data => findArtworkById(data.artwork, selectedArtwork))
       .then(foundWork => {
         if(foundWork){
+          console.log("This artwork was found")
           return this.props.selectArtwork(foundWork);
         }
         else {
+          console.log("This artwork was NOT found")
           return this.props.selectArtwork(selectedArtwork);
         }
       })

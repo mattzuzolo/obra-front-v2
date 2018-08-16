@@ -25,10 +25,11 @@ class DetailContainer extends Component {
     fetch(`http://localhost:4000/artwork/${this.props.paramsId}`)
       .then(response => response.json())
       .then(foundArtwork => this.props.selectArtwork(foundArtwork.artwork))
+      .catch(error => console.log("Selected artwork after error: ", this.props.selectedArtwork))
 
-    // fetch(annotationUrl)
-    //   .then(response => response.json())
-    //   .then(data => this.filterAnnotationsByArtwork(data.annotations))
+    fetch(annotationUrl)
+      .then(response => response.json())
+      .then(data => this.filterAnnotationsByArtwork(data.annotations))
   }
 
   onInputChange = (event) => {
@@ -58,6 +59,16 @@ class DetailContainer extends Component {
     if(!this.props.selectedArtwork.accessionyear){
       //This artwork is part of the internal DB. Only post annotation
       console.log("work is present")
+      let annotationPostSubmissionBody = {
+        artwork: [this.props.selectedArtwork],
+        user: [this.props.loggedInUser],
+        headline: this.state.headline,
+        source: this.state.sourceLink,
+        content: this.state.content,
+        xCoord: this.state.xCoord,
+        yCoord: this.state.yCoord,
+      }
+      postAnnotationFetch(annotationPostSubmissionBody)
     }
     else {
       let artworkPostSubmissionBody = {
@@ -75,7 +86,14 @@ class DetailContainer extends Component {
   }
 
   filterAnnotationsByArtwork = (annotationData) => {
-    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork === parseInt(this.props.selectedArtwork._id, 10));
+    console.log("Annotation data after fetch", annotationData)
+    console.log("Annotation data from DB id:", annotationData[7].artwork[0])
+    console.log("Annotation data local id:", this.props.selectedArtwork._id)
+
+    // let filteredAnnotations = annotationData.filter(individualAnnotation => console.log("selected artwork", this.props.selectedArtwork._id));
+
+    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
+    // console.log("Filtered annotations", filteredAnnotations)
     this.setState({ annotationArray: filteredAnnotations })
   }
 
@@ -196,6 +214,23 @@ function postArtworkFetch(postArtworkBody){
 
   console.log("Config", postArtworkConfig);
   return fetch(artworkUrl, postArtworkConfig);
+}
+
+function postAnnotationFetch(annotationPostSubmissionBody){
+  console.log("You entered the POST annotation fetch")
+  console.log("Submission body", annotationPostSubmissionBody);
+
+  let postAnnotationConfig = {
+    Accept: "application/json",
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(annotationPostSubmissionBody)
+  }
+
+  console.log("Config", postAnnotationConfig)
+  return fetch(annotationUrl, postAnnotationConfig);
 }
 
 
