@@ -13,6 +13,7 @@ class ArtListContainer extends Component {
       .then(foundWork => {
         if(foundWork){
           console.log("This artwork was found")
+          this.props.routerProps.history.push(`/artwork/${foundWork._id}`)
           return this.props.selectArtwork(foundWork);
         }
         else {
@@ -23,7 +24,6 @@ class ArtListContainer extends Component {
       .catch(console.error)
 
       //id only works when not in my db. Still can't directly access it though
-    this.props.routerProps.history.push(`/artwork/${this.props.selectedArtwork.id}`)
   }
 
   render(){
