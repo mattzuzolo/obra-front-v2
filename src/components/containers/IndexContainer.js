@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import $ from 'jquery';
-
 import ArtListContainer from "./ArtListContainer"
+let querystring = require('querystring')
+
 
 class IndexContainer extends Component {
     constructor(props){
@@ -24,7 +24,7 @@ class IndexContainer extends Component {
     this.setState({ activeQuery: event.target.value })
   }
 
-  
+
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -32,13 +32,13 @@ class IndexContainer extends Component {
     let submittedQuery = this.state.activeQuery;
 
     var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
-    var queryString = $.param({
-        apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
-        title: submittedQuery,
-        classification: "Paintings"
-    });
+    let searchString = querystring.stringify({
+      apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
+      title: submittedQuery,
+      classification: "Paintings"
+    })
 
-    fetch(apiEndpointBaseURL + "?" + queryString)
+    fetch(apiEndpointBaseURL + "?" + searchString)
       .then(response => response.json())
       .then(data => filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
