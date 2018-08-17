@@ -52,8 +52,6 @@ class ArtListContainer extends Component {
         }
       })
       .catch(console.error)
-
-      //id only works when not in my db. Still can't directly access it though
   }
 
   render(){

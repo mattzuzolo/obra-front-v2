@@ -16,9 +16,6 @@ import reducer from './reducers/reducer'
 
 // const store = configureStore()
 let store = createStore(reducer);
-// console.log("INDEX", store.getState())
-// console.log('store', store)
-// console.log('state', store.getState())
 
 const addLoggingToDispatch = (store) => {
   const rawDispatch = store.dispatch;

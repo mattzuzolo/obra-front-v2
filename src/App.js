@@ -16,15 +16,12 @@ class App extends Component {
       <div className="container div--app App">
         <Route path="/" component={NavBar} />
           <Switch>
-
             <Route path ={`/artwork/:id`} render={(routerProps) => {
                 let paramsId = routerProps.match.params.id;
                 return <DetailContainer routerProps={routerProps} paramsId={paramsId}/>
               }} />
-
             <Route path="/artwork" render={(routerProps) => <IndexContainer
                 routerProps={routerProps} />}/>
-
             <Route path="/login" component={LoginContainer} />
           </Switch>
       </div>
