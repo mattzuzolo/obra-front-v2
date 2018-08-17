@@ -24,6 +24,8 @@ class IndexContainer extends Component {
     this.setState({ activeQuery: event.target.value })
   }
 
+  
+
   handleFormSubmit = (event) => {
     event.preventDefault();
 

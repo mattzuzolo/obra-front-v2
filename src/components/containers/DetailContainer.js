@@ -54,11 +54,7 @@ class DetailContainer extends Component {
 
   onAnnotationSubmit = (event) => {
     event.preventDefault();
-    // console.log("You submitted the form")
-
     if(!this.props.selectedArtwork.accessionyear){
-      //This artwork is part of the internal DB. Only post annotation
-      // console.log("work is present")
       let annotationPostSubmissionBody = {
         artwork: [this.props.selectedArtwork],
         user: [this.props.loggedInUser],
@@ -68,37 +64,23 @@ class DetailContainer extends Component {
         xCoord: this.state.xCoord,
         yCoord: this.state.yCoord,
       }
-      postAnnotationFetch(annotationPostSubmissionBody)
-    }
-    else {
-      let artworkPostSubmissionBody = {
-        title: this.props.selectedArtwork.title,
-        artist: this.props.selectedArtwork.people[0].alphasort,
-        medium: this.props.selectedArtwork.medium,
-        century: this.props.selectedArtwork.century,
-        culture: this.props.selectedArtwork.culture,
-        url: this.props.selectedArtwork.url,
-        primaryimageurl: this.props.selectedArtwork.primaryimageurl,
-        id: this.props.selectedArtwork.id
-      }
-      postArtworkFetch(artworkPostSubmissionBody)
-        .then(response => response.json())
-        .then(artworkPostResponseData => {
-          let annotationPostSubmissionBody = {
-            artwork: [artworkPostResponseData],
-            user: [this.props.loggedInUser],
-            headline: this.state.headline,
-            source: this.state.sourceLink,
-            content: this.state.content,
-            xCoord: this.state.xCoord,
-            yCoord: this.state.yCoord,
-          }
-          return postAnnotationFetch(annotationPostSubmissionBody);
-        })
-        .then(response => response.json())
-        .then(annotationResponseData => console.log("Annotation response", annotationResponseData))
+      this.postAnnotationFetch(annotationPostSubmissionBody)
     }
   }
+
+  postAnnotationFetch = (annotationPostSubmissionBody) => {
+      let postAnnotationConfig = {
+        Accept: "application/json",
+          method: "POST",
+          headers: {
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(annotationPostSubmissionBody)
+      }
+
+      return fetch(annotationUrl, postAnnotationConfig);
+    }
+
 
   filterAnnotationsByArtwork = (annotationData) => {
     let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
@@ -129,8 +111,6 @@ class DetailContainer extends Component {
 
 
   render(){
-    console.log("State in detail", this.state);
-
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
@@ -207,40 +187,7 @@ function mapDispatchToProps(dispatch){
 export default connect(mapStateToProps, mapDispatchToProps)(DetailContainer);
 
 
-function postArtworkFetch(postArtworkBody){
-  console.log("You entered the POST artwork fetch")
-  console.log("Submission body", postArtworkBody);
 
-  let postArtworkConfig = {
-    Accept: "application/json",
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(postArtworkBody)
-  }
-
-  console.log("Config", postArtworkConfig);
-  return fetch(artworkUrl, postArtworkConfig);
-}
-
-function postAnnotationFetch(annotationPostSubmissionBody){
-  // console.log("You entered the POST annotation fetch")
-  // console.log("Submission body", annotationPostSubmissionBody);
-
-  let postAnnotationConfig = {
-    Accept: "application/json",
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(annotationPostSubmissionBody)
-  }
-
-  // console.log("Config", postAnnotationConfig)
-  // console.log("FETCH TRIGGERS HERE.")
-  return fetch(annotationUrl, postAnnotationConfig);
-}
 
 
 
