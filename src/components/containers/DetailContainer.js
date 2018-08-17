@@ -51,7 +51,6 @@ class DetailContainer extends Component {
     })
   }
 
-
   onAnnotationSubmit = (event) => {
     event.preventDefault();
     if(!this.props.selectedArtwork.accessionyear){
@@ -120,19 +119,39 @@ class DetailContainer extends Component {
     }
 
     return(
-      <div>
-        <div id="annotation-zone"  >
-            { this.state.displayingMarker
-                      ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
-                      : null
-            }
-            <img onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
+      <div className="container div--detail-container">
+        <div className="div--art-annotations-container">
+          <div className="annotation-zone">
+              { this.state.displayingMarker
+                        ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
+                        : null
+              }
+              <img id="detail-image" onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
+          </div>
+
+          <div className="div--annotation-list-container">
+            {this.state.annotationArray.map(individualAnnotation => (
+              <AnnotationCard
+                annotation={individualAnnotation}
+                key={individualAnnotation._id}
+                id={individualAnnotation._id}
+                headline={individualAnnotation.headline}
+                source={individualAnnotation.source}
+                content={individualAnnotation.content}
+                onAnnotationCardClick={this.onAnnotationCardClick}
+                onAnnotationCardPut={this.onAnnotationCardPut}
+                onAnnotationCardDelete={this.onAnnotationCardDelete}
+              />
+            ))}
+          </div>
         </div>
 
-        <h1>{this.props.selectedArtwork.title}</h1>
-        <h3>{this.props.selectedArtwork.artist}</h3>
-        <p>Medium: {this.props.selectedArtwork.medium}</p>
-        <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
+        <div className="div--artwork-info">
+          <h1>{this.props.selectedArtwork.title}</h1>
+          <h3>{this.props.selectedArtwork.artist}</h3>
+          <p>Medium: {this.props.selectedArtwork.medium}</p>
+          <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
+        </div>
 
         <form onSubmit={this.onAnnotationSubmit}>
           <label>Headline:</label>
@@ -147,21 +166,7 @@ class DetailContainer extends Component {
           <button>Submit annotation</button>
         </form>
 
-        <div>
-          {this.state.annotationArray.map(individualAnnotation => (
-            <AnnotationCard
-              annotation={individualAnnotation}
-              key={individualAnnotation._id}
-              id={individualAnnotation._id}
-              headline={individualAnnotation.headline}
-              source={individualAnnotation.source}
-              content={individualAnnotation.content}
-              onAnnotationCardClick={this.onAnnotationCardClick}
-              onAnnotationCardPut={this.onAnnotationCardPut}
-              onAnnotationCardDelete={this.onAnnotationCardDelete}
-            />
-          ))}
-        </div>
+
 
       </div>
     )
