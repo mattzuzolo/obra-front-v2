@@ -1,7 +1,12 @@
 const defaultState = {
   artworkArray: [],
   selectedArtwork: {},
-  loggedInUser: {},
+  loggedInUser: {
+    _id: "5b7464d118664e1696ee9a46",
+    username: "matt",
+    password: "matt1234",
+    __v: 0
+},
 }
 
 export default function(state = defaultState, action) {

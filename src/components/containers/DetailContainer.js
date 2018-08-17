@@ -65,6 +65,8 @@ class DetailContainer extends Component {
         yCoord: this.state.yCoord,
       }
       this.postAnnotationFetch(annotationPostSubmissionBody)
+      .then(response => response.json())
+      .then(newAnnotation => this.setState({ annotationArray: [...this.state.annotationArray, newAnnotation]}) )
     }
   }
 
@@ -129,7 +131,8 @@ class DetailContainer extends Component {
 
         <h1>{this.props.selectedArtwork.title}</h1>
         <h3>{this.props.selectedArtwork.artist}</h3>
-        <p>{this.props.selectedArtwork.medium} <br /><a href={this.props.selectedArtwork.url}>Read more here</a></p>
+        <p>Medium: {this.props.selectedArtwork.medium}</p>
+        <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
 
         <form onSubmit={this.onAnnotationSubmit}>
           <label>Headline:</label>

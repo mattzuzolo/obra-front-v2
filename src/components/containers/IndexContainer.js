@@ -42,6 +42,7 @@ class IndexContainer extends Component {
       .then(response => response.json())
       .then(data => filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
+      .then(console.log)
   }
 
   render(){
