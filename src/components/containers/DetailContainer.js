@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import AnnotationCard from "../AnnotationCard"
 import FullAnnotation from "../FullAnnotation"
+import EditForm from "../EditForm"
 
 const annotationUrl = "http://localhost:4000/annotations";
 
@@ -17,8 +18,10 @@ class DetailContainer extends Component {
         xCoord: 0,
         yCoord: 0,
         displayingMarker: false,
-        annotationArray: [1,2,3],
+        annotationArray: [],
         selectedAnnotation: {},
+        displayingFullAnnotation: false,
+        displayingEditForm: false,
     }
   }
 
@@ -109,12 +112,24 @@ class DetailContainer extends Component {
       yCoord: yCoord,
       displayingMarker: true,
       selectedAnnotation: individualAnnotation,
+      displayingEditForm: false,
+      displayingFullAnnotation: true,
     });
+  }
+
+  onAnnotationCardUpdate = (event, individualAnnotation) => {
+    console.log("You've clicked the edit form", individualAnnotation)
+
+    this.setState({
+      displayingEditForm: true,
+      displayingFullAnnotation: false,
+    });
+
+
   }
 
   onAnnotationCardDelete = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
-
     fetch(urlWithId, {
         method: 'DELETE',
         headers: {
@@ -125,9 +140,7 @@ class DetailContainer extends Component {
 
 
   render(){
-
-    console.log("Detail state at render", this.state)
-    // console.log("Detail props", this.props)
+    console.log("STATE AT RENDER", this.state)
 
     let annotationMarkerStyle = {
       top: this.state.yCoord,
@@ -184,18 +197,31 @@ class DetailContainer extends Component {
                 source={individualAnnotation.source}
                 content={individualAnnotation.content}
                 onAnnotationCardClick={this.onAnnotationCardClick}
-                onAnnotationCardPut={this.onAnnotationCardPut}
-                onAnnotationCardDelete={this.onAnnotationCardDelete}
+
               />
             ))}
           </div>
         </div>
 
 
+        { this.state.displayingFullAnnotation
+                  ? <FullAnnotation
+                    selectedAnnotation={this.state.selectedAnnotation}
+                    onAnnotationCardUpdate={this.onAnnotationCardUpdate}
+                    onAnnotationCardDelete={this.onAnnotationCardDelete}
+                    />
+                  : null
+        }
+
+        { this.state.displayingEditForm
+                  ? <EditForm
+                    selectedAnnotation={this.state.selectedAnnotation}
+                    />
+                  : null
+        }
 
 
 
-        <FullAnnotation selectedAnnotation={this.state.selectedAnnotation} />
 
 
       </div>
