@@ -5,7 +5,7 @@ import ArtCard from "../ArtCard"
 const artworkUrl = "http://localhost:4000/artwork"
 
 class ArtListContainer extends Component {
-
+  
   postArtwork = () => {
     let artworkPostSubmissionBody = {
       title: this.props.selectedArtwork.title,
@@ -31,31 +31,30 @@ class ArtListContainer extends Component {
   }
 
   onClickArtwork = (event, selectedArtwork) => {
-
     //check to see if artwork exists in internal database
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
-      .then(data => findArtworkById(data.artwork, selectedArtwork))
+      .then(data => this.findArtworkById(data.artwork, selectedArtwork))
       .then(foundWork => {
         if(foundWork){
-          console.log("This artwork was found")
           this.props.routerProps.history.push(`/artwork/${foundWork.id}`)
           return this.props.selectArtwork(foundWork);
         }
         else {
           this.props.selectArtwork(selectedArtwork);
-          console.log("This artwork was NOT found in the internal db", this.props.selectedArtwork)
           this.postArtwork()
             .then(response => response.json())
             .then(newArtwork => this.props.routerProps.history.push(`/artwork/${newArtwork.id}`))
-
         }
       })
       .catch(console.error)
   }
 
+  findArtworkById = (fetchedArray, selectedArtwork) => {
+    return fetchedArray.find(individualArtwork => individualArtwork.id === parseInt(selectedArtwork.id, 10))
+  }
+
   render(){
-    console.log(this.props.artworkArray[0])
     return(
       <div className="container div--art-list-container">
         {this.props.artworkArray.map(individualCard => (
@@ -97,8 +96,6 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-function findArtworkById(fetchedArray, selectedArtwork){
-  return fetchedArray.find(individualArtwork => individualArtwork.id === parseInt(selectedArtwork.id, 10))
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArtListContainer);
