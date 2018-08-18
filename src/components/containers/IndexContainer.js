@@ -11,7 +11,7 @@ class IndexContainer extends Component {
         activeQuery: "",
       }
     }
-
+//
   componentDidMount(){
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
