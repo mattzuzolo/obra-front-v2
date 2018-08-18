@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ArtListContainer from "./ArtListContainer"
-let querystring = require('querystring')
+
+const querystring = require('querystring')
 
 
 class HomeContainer extends Component {
@@ -67,7 +67,5 @@ function mapDispatchToProps(dispatch){
     },
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
