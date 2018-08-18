@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import FullAnnotation from "../FullAnnotation"
 import AnnotationCard from "../AnnotationCard"
+import FullAnnotation from "../FullAnnotation"
 
-const artworkUrl = "http://localhost:4000/artwork"
 const annotationUrl = "http://localhost:4000/annotations";
 
 class DetailContainer extends Component {
@@ -24,6 +23,7 @@ class DetailContainer extends Component {
   }
 
   componentDidMount(){
+
     fetch(`http://localhost:4000/artwork/${this.props.paramsId}`)
       .then(response => response.json())
       .then(foundArtwork => this.props.selectArtwork(foundArtwork.artwork))
@@ -78,21 +78,20 @@ class DetailContainer extends Component {
   }
 
   postAnnotationFetch = (annotationPostSubmissionBody) => {
-      let postAnnotationConfig = {
-        Accept: "application/json",
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(annotationPostSubmissionBody)
-      }
-
-      return fetch(annotationUrl, postAnnotationConfig);
+    let postAnnotationConfig = {
+      Accept: "application/json",
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(annotationPostSubmissionBody)
     }
 
+    return fetch(annotationUrl, postAnnotationConfig);
+  }
 
   filterAnnotationsByArtwork = (annotationData) => {
-    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
+    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] === parseInt(this.props.selectedArtwork._id,10));
     this.setState({ annotationArray: filteredAnnotations })
   }
 
@@ -122,8 +121,6 @@ class DetailContainer extends Component {
 
   render(){
 
-    // console.log("STATE AT RENDER DETAIL", this.state.selectedAnnotation)
-
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
@@ -139,7 +136,7 @@ class DetailContainer extends Component {
                         ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
                         : null
               }
-              <img id="detail-image" onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
+              <img id="detail-image" alt={this.props.selectedArtwork.title} onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
           </div>
 
           <div className="div--annotation-list-container">
