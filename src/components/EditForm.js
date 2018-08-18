@@ -1,34 +1,50 @@
 import React, { Component } from 'react';
 
 class FullAnnotation extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      headline: this.props.selectedAnnotation.headline,
+      sourceLink: this.props.selectedAnnotation.source,
+      content: this.props.selectedAnnotation.content,
+      xCoord: this.props.selectedAnnotation.xCoord,
+      yCoord: this.props.selectedAnnotation.yCoord,
+    }
+  }
 
   onInputChange = (event) => {
     let fieldName = event.target.name;
     let currentValue = event.target.value;
     this.setState({ [fieldName]: currentValue })
   }
-  
+
   render(){
     return(
       <div className="div div--full-annotation">
       <h1>Update your annotation:</h1>
-        <form className="container div--detail-form" onSubmit={"this.onAnnotationSubmit"}>
-          <div className="detail-form-small-inputs">
+        <form className="container div--edit-form" onSubmit={(event) => this.props.onAnnotationUpdateSubmit(event, this.state)}>
+          <div className="edit-form-small-inputs">
 
-            <label className="detail-form-label">Headline:</label>
+            <label className="edit-form-label">X Coordinate:</label>
+            <input className="edit-form-input-coord" value={this.state.xCoord}></input>
+            <label className="edit-form-label">Y Coordinate:</label>
+            <input className="edit-form-input-coord" value={this.state.yCoord}></input>
+            <br/><br/>
+            <label className="edit-form-label">Headline:</label>
             <br/>
-            <input className="detail-form-input" placeholder="headline here" name="headline" value={"this.state.headline"} onChange={"this.onInputChange"} ></input>
+            <input className="edit-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
             <br/>
-            <label className="detail-form-label">Link:</label>
+            <label className="edit-form-label">Link:</label>
             <br/>
-            <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={"this.state.sourceLink"} onChange={"this.onInputChange"} ></input>
+            <input className="edit-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
             <br/>
           </div>
-            <label className="detail-form-label">Annotation:</label>
+            <label className="edit-form-label">Annotation:</label>
             <br/>
-            <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={"this.state.content"} onChange={"this.onInputChange"} ></textarea>
+            <textarea className="edit-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
             <br/>
-            <button className="detail-form-button">Submit annotation</button>
+            <button className="edit-form-button">Submit annotation</button>
 
         </form>
       </div>

@@ -117,16 +117,52 @@ class DetailContainer extends Component {
     });
   }
 
-  onAnnotationCardUpdate = (event, individualAnnotation) => {
-    console.log("You've clicked the edit form", individualAnnotation)
+  onAnnotationUpdateFormDisplay = (event) => {
+    event.persist();
+    event.preventDefault();
 
     this.setState({
       displayingEditForm: true,
       displayingFullAnnotation: false,
     });
-
-
   }
+
+  onAnnotationUpdateSubmit = (event, formState) => {
+    event.preventDefault();
+
+    let updateUrl = `http://localhost:4000/annotations/${this.state.selectedAnnotation._id}`
+    let updateSubmissionBody = {
+        artwork: [this.state.selectedAnnotation.artwork],
+        user: [this.state.selectedAnnotation.user],
+        // _id: this.state.selectedAnnotation._id,
+        headline: formState.headline,
+        content: formState.content,
+        source: formState.sourceLink,
+        xCoord: formState.xCoord,
+        yCoord: formState.yCoord,
+    }
+
+    console.log("updateSubmissionBody", updateSubmissionBody);
+
+    let updateConfig = {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(updateSubmissionBody)
+    }
+
+    console.log("URL TO FETCH", updateUrl)
+    console.log("UPDATE FECTH", updateConfig);
+
+    fetch(updateUrl, updateConfig)
+      .then(response => response.json())
+      .then(data => console.log("RETURNED FROM UPDATE", data))
+      .catch(console.error)
+  }
+
+
 
   onAnnotationCardDelete = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
@@ -140,7 +176,7 @@ class DetailContainer extends Component {
 
 
   render(){
-    console.log("STATE AT RENDER", this.state)
+    // console.log("STATE AT RENDER", this.state)
 
     let annotationMarkerStyle = {
       top: this.state.yCoord,
@@ -207,7 +243,7 @@ class DetailContainer extends Component {
         { this.state.displayingFullAnnotation
                   ? <FullAnnotation
                     selectedAnnotation={this.state.selectedAnnotation}
-                    onAnnotationCardUpdate={this.onAnnotationCardUpdate}
+                    onAnnotationUpdateFormDisplay={this.onAnnotationUpdateFormDisplay}
                     onAnnotationCardDelete={this.onAnnotationCardDelete}
                     />
                   : null
@@ -216,6 +252,10 @@ class DetailContainer extends Component {
         { this.state.displayingEditForm
                   ? <EditForm
                     selectedAnnotation={this.state.selectedAnnotation}
+                    xCoord={this.state.xCoord}
+                    yCoord={this.state.yCoord}
+                    onAnnotationUpdateFormDisplay={this.onAnnotationUpdateFormDisplay}
+                    onAnnotationUpdateSubmit={this.onAnnotationUpdateSubmit}
                     />
                   : null
         }
