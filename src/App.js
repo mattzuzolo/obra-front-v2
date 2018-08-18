@@ -28,7 +28,8 @@ class App extends Component {
               routerProps={routerProps} />}/>
             <Route path="/home" render={(routerProps) => <HomeContainer
               routerProps={routerProps} />}/>
-            <Route path="/annotations" component={AnnotationContainer} />
+            <Route path="/annotations" render={(routerProps) => <AnnotationContainer
+              routerProps={routerProps} />}/>
             <Route path="/about" component={AboutContainer} />
             <Route path="/login" component={LoginContainer} />
           </Switch>

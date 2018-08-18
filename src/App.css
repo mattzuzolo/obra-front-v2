@@ -375,6 +375,67 @@ button:hover{
     border-color: gray;
   }
 
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* ANNOTATION LIST ITEM CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.annotation-list-item-header{
+  color: gray;
+}
+
+.div--annotation-list-item{
+
+  margin: 2.5rem;
+  padding: 1.5rem;
+  width: 90%;
+  border-style: solid;
+  border-width: 1px;
+  /* border-color: #C8C8C8; GRAY*/
+  border-color: #6f65e9;
+
+  display:flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+  .div--annotation-list-item img{
+    width: 70%;
+  }
+
+  .div--annotation-list-item-left{
+    margin: 1rem;
+    margin-left: auto;
+  }
+
+  .div--annotation-list-item-right{
+    margin: 1rem;
+    max-width: 40%;
+  }
+
+  .annotation-list-item-title{
+    font-size: 2.75rem;
+    margin-top: -1rem;
+  }
+
+  .annotation-list-item-artist{
+    font-size: 2rem;
+  }
+
+  .annotation-list-item-detail{
+    font-size: 1.5rem;
+  }
+
+  .detail-source{
+    font-size: 1.1rem;
+    margin-top: -1.5rem;
+  }
+
+  .div--annotation-artwork-info-container{
+    margin-bottom: 2.5rem;
+  }
+
+
 
 /* ——————————————————————— */
 /* ——————————————————————— */
