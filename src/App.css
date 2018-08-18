@@ -294,16 +294,15 @@ button:hover{
     margin: 1rem;
     margin-right: 1.5rem;
     text-transform: uppercase;
+    float: left;
+    font-size: 2.25rem;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 200;
   }
     .div--nav-bar-item:hover {
       text-decoration: line-through;
     }
-    .nav-item {
-      float: left;
-      font-size: 2.25rem;
-      font-family: 'Libre Franklin', sans-serif;
-      font-weight: 200;
-    }
+
     .logo {
       float: left;
       /* font-weight: 500; */

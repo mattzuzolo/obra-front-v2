@@ -27,11 +27,12 @@ class DetailContainer extends Component {
     fetch(`http://localhost:4000/artwork/${this.props.paramsId}`)
       .then(response => response.json())
       .then(foundArtwork => this.props.selectArtwork(foundArtwork.artwork))
-      .catch(error => console.log("Selected artwork after error: ", this.props.selectedArtwork))
+      .catch(console.error)
 
     fetch(annotationUrl)
       .then(response => response.json())
       .then(data => this.filterAnnotationsByArtwork(data.annotations))
+      .catch(console.error)
   }
 
   onInputChange = (event) => {

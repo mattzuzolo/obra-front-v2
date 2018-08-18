@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ArtListContainer from "./ArtListContainer"
-let querystring = require('querystring')
-
 
 class AnnotationContainer extends Component {
     constructor(props){
