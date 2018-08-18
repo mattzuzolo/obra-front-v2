@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import ArtListContainer from "./ArtListContainer"
 let querystring = require('querystring')
 
-
 class IndexContainer extends Component {
     constructor(props){
       super(props);
 
       this.state = {
         activeQuery: "",
-        submittedQuery: "",
       }
     }
 
@@ -24,13 +22,14 @@ class IndexContainer extends Component {
     this.setState({ activeQuery: event.target.value })
   }
 
-
+  filterForImageLinkPresent = (data) => {
+    return data.filter(individualWork => individualWork.primaryimageurl !== null )
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
 
     let submittedQuery = this.state.activeQuery;
-
     var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
     let searchString = querystring.stringify({
       apikey: "0eec8470-9658-11e8-90a5-d90dedc085a2",
@@ -40,22 +39,19 @@ class IndexContainer extends Component {
 
     fetch(apiEndpointBaseURL + "?" + searchString)
       .then(response => response.json())
-      .then(data => filterForImageLinkPresent(data.records))
+      .then(data => this.filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
-      .then(console.log)
   }
 
   render(){
     return(
       <div className="container div--index-container">
-
         <form className="form form--index" onSubmit={this.handleFormSubmit}>
           <input placeholder="Search" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
           <button>Submit</button>
         </form>
 
         <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />
-
       </div>
     );
   }
@@ -73,10 +69,6 @@ function mapDispatchToProps(dispatch){
       dispatch({type: "UPDATE_ARTWORK_ARRAY", payload: dataArray})
     },
   }
-}
-
-let filterForImageLinkPresent = (data) => {
-  return data.filter(individualWork => individualWork.primaryimageurl !== null )
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IndexContainer);

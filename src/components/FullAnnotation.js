@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 class FullAnnotation extends Component {
-
-
   render(){
     return(
       <div className="div div--full-annotation">

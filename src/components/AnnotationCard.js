@@ -8,7 +8,7 @@ class AnnotationCard extends Component {
         <p>{this.props.source}</p>
         <p>{this.props.content}</p>
         <br />
-        <button onClick={(event) => this.props.onAnnotationCardDelete(event, this.props.annotation)} >Click here to delete me</button>
+        <button className="button button--annotation-card-delete" onClick={(event) => this.props.onAnnotationCardDelete(event, this.props.annotation)} >Click here to delete me</button>
       </div>
     );
   }

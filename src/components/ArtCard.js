@@ -8,7 +8,7 @@ class ArtCard extends Component {
         <div className="div--art-card-left">
           <img src={this.props.primaryimageurl} alt="thumbail"></img>
         </div>
-        
+
         <div className="div--art-card-right">
           <h1 className="h1 art-card-title">{this.props.title}</h1>
             { this.props.artist
