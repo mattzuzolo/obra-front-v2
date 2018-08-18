@@ -120,6 +120,7 @@ class DetailContainer extends Component {
 
     return(
       <div className="container div--detail-container">
+
         <div className="div--art-annotations-container">
           <div className="annotation-zone">
               { this.state.displayingMarker
@@ -132,6 +133,7 @@ class DetailContainer extends Component {
           <div className="div--annotation-list-container">
             {this.state.annotationArray.map(individualAnnotation => (
               <AnnotationCard
+                className="div--annotation-card"
                 annotation={individualAnnotation}
                 key={individualAnnotation._id}
                 id={individualAnnotation._id}
@@ -151,19 +153,23 @@ class DetailContainer extends Component {
           <h3>{this.props.selectedArtwork.artist}</h3>
           <p>Medium: {this.props.selectedArtwork.medium}</p>
           <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
+          <button>Prepare an annotation</button>
         </div>
 
-        <form onSubmit={this.onAnnotationSubmit}>
+        <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
           <label>Headline:</label>
-          <input placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
-
+          <br/>
+          <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
+          <br/>
           <label>Link:</label>
-          <input placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
-
+          <br/>
+          <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
+          <br/>
           <label>Annotation:</label>
-          <textarea placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
-
-          <button>Submit annotation</button>
+          <br/>
+          <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
+          <br/>
+          <button className="detail-form-button">Submit annotation</button>
         </form>
 
 

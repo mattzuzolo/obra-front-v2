@@ -26,7 +26,7 @@ class App extends Component {
               }} />
             <Route path="/artwork" render={(routerProps) => <IndexContainer
                 routerProps={routerProps} />}/>
-              <Route path="/home" component={HomeContainer} />
+            <Route path="/home" component={HomeContainer} />
             <Route path="/login" component={LoginContainer} />
             <Route path="/annotations" component={AnnotationContainer} />
             <Route path="/about" component={AboutContainer} />

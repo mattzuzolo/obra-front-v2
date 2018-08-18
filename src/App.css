@@ -10,9 +10,9 @@ a {
   color: #6f65e9;
 }
 
-img {
+/* img {
   width: 100%;
-}
+} */
 
 form {
   text-align: center;
@@ -30,6 +30,17 @@ input {
   border-radius: 1rem;
   border-color: #6f65e9;
   padding-left: 1rem;
+}
+
+textarea{
+  height: 5.5rem;
+  font-size:3rem;
+  color: #6f65e9;
+  border-radius: 1rem;
+  border-color: #6f65e9;
+  padding-left: 1rem;
+  width: 45%;
+  height: 35%;
 }
 
 button {
@@ -61,8 +72,57 @@ button:hover{
   width:100px;
 }
 
-.div--art-card {
-  width: 80%;
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* DETAIL CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.art-annotations-container{
+  display:flex;
+}
+
+  .div--art-annotations-container{
+    display:flex;
+  }
+    .annotation-zone{
+
+    }
+    .annotation-zone img{
+      width:95%;
+    }
+
+    .annotation-list-container{
+      overflow-y: auto;
+    }
+
+      .div--annotation-card{
+        width:95%;
+        margin-bottom: 3%;
+        border: 2px solid #6f65e9;
+      }
+
+.div--detail-form{
+  text-align: left;
+
+}
+.detail-form-input{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.div--detail-form button  {
+  margin-left: 0rem;
+  margin-top: 1rem;
+}
+
+.div--detail-form textarea  {
+
+}
+
+.div--artwork-info button {
+  margin-left: 0rem;
+  margin-top: 1rem;
 }
 
 /* ——————————————————————— */
@@ -94,10 +154,11 @@ button:hover{
   margin: 2.5rem;
   padding: 1.5rem;
   width: 90%;
-  border-style: solid ;
+  border-style: solid;
   border-width: 1px;
   /* border-color: #C8C8C8; GRAY*/
   border-color: #6f65e9;
+
   display:flex;
   justify-content: center;
   vertical-align: middle;
