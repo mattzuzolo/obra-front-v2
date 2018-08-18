@@ -17,7 +17,7 @@ class DetailContainer extends Component {
         xCoord: 0,
         yCoord: 0,
         displayingMarker: false,
-        annotationArray: [],
+        annotationArray: [1,2,3],
         selectedAnnotation: {},
     }
   }
@@ -32,7 +32,12 @@ class DetailContainer extends Component {
     fetch(annotationUrl)
       .then(response => response.json())
       .then(data => this.filterAnnotationsByArtwork(data.annotations))
+      .then(filteredData => this.setState({annotationArray: filteredData}))
       .catch(console.error)
+  }
+
+  filterAnnotationsByArtwork = (annotationData) => {
+    return annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
   }
 
   onInputChange = (event) => {
@@ -68,12 +73,15 @@ class DetailContainer extends Component {
       }
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => response.json())
-      .then(newAnnotation => this.setState({
-        annotationArray: [...this.state.annotationArray, newAnnotation],
-        headline: "",
-        sourceLink: "",
-        content: "",
-      }) )
+      .then(newAnnotation => console.log("NEW ANNOTATION", newAnnotation))
+      .catch(console.error)
+      // .then(newAnnotation => this.setState({
+      //   annotationArray: [...this.state.annotationArray, newAnnotation],
+      //   headline: "",
+      //   sourceLink: "",
+      //   content: "",
+      // }) )
+
     }
   }
 
@@ -90,10 +98,7 @@ class DetailContainer extends Component {
     return fetch(annotationUrl, postAnnotationConfig);
   }
 
-  filterAnnotationsByArtwork = (annotationData) => {
-    let filteredAnnotations = annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] === parseInt(this.props.selectedArtwork._id,10));
-    this.setState({ annotationArray: filteredAnnotations })
-  }
+
 
   onAnnotationCardClick = (event, individualAnnotation) => {
     let xCoord = individualAnnotation.xCoord;
@@ -121,6 +126,9 @@ class DetailContainer extends Component {
 
   render(){
 
+    console.log("Detail state at render", this.state)
+    // console.log("Detail props", this.props)
+
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
@@ -144,8 +152,8 @@ class DetailContainer extends Component {
               <AnnotationCard
                 className="div--annotation-card"
                 annotation={individualAnnotation}
-                key={individualAnnotation._id}
-                id={individualAnnotation._id}
+                key={individualAnnotation.id}
+                id={individualAnnotation.id}
                 headline={individualAnnotation.headline}
                 source={individualAnnotation.source}
                 content={individualAnnotation.content}
@@ -155,6 +163,8 @@ class DetailContainer extends Component {
               />
             ))}
           </div>
+
+
         </div>
 
         <div className="div--artwork-info">
