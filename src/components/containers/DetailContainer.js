@@ -151,6 +151,26 @@ class DetailContainer extends Component {
                 <p>Medium: {this.props.selectedArtwork.medium}</p>
                 <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
               </div>
+              <hr/>
+              <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
+                <div className="detail-form-small-inputs">
+
+                  <label className="detail-form-label">Headline:</label>
+                  <br/>
+                  <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
+                  <br/>
+                  <label className="detail-form-label">Link:</label>
+                  <br/>
+                  <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
+                  <br/>
+                </div>
+                  <label className="detail-form-label">Annotation:</label>
+                  <br/>
+                  <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
+                  <br/>
+                  <button className="detail-form-button">Submit annotation</button>
+
+              </form>
           </div>
 
           <div className="div--annotation-list-container">
@@ -173,21 +193,7 @@ class DetailContainer extends Component {
 
 
 
-        <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
-          <label>Headline:</label>
-          <br/>
-          <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
-          <br/>
-          <label>Link:</label>
-          <br/>
-          <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
-          <br/>
-          <label>Annotation:</label>
-          <br/>
-          <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
-          <br/>
-          <button className="detail-form-button">Submit annotation</button>
-        </form>
+
 
         <FullAnnotation selectedAnnotation={this.state.selectedAnnotation} />
 
