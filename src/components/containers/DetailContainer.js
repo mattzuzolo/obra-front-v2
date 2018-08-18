@@ -145,6 +145,12 @@ class DetailContainer extends Component {
                         : null
               }
               <img id="detail-image" alt={this.props.selectedArtwork.title} onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
+              <div className="div--artwork-info">
+                <h1>{this.props.selectedArtwork.title}</h1>
+                <h3>{this.props.selectedArtwork.artist}</h3>
+                <p>Medium: {this.props.selectedArtwork.medium}</p>
+                <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
+              </div>
           </div>
 
           <div className="div--annotation-list-container">
@@ -163,17 +169,9 @@ class DetailContainer extends Component {
               />
             ))}
           </div>
-
-
         </div>
 
-        <div className="div--artwork-info">
-          <h1>{this.props.selectedArtwork.title}</h1>
-          <h3>{this.props.selectedArtwork.artist}</h3>
-          <p>Medium: {this.props.selectedArtwork.medium}</p>
-          <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
-          <button>Prepare an annotation</button>
-        </div>
+
 
         <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
           <label>Headline:</label>
