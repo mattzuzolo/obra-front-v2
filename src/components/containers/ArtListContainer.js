@@ -55,6 +55,7 @@ class ArtListContainer extends Component {
   }
 
   render(){
+    console.log(this.props.artworkArray[0])
     return(
       <div className="container div--art-list-container">
         {this.props.artworkArray.map(individualCard => (
@@ -65,6 +66,9 @@ class ArtListContainer extends Component {
             id={individualCard.id}
             title={individualCard.title}
             artist={individualCard.artist}
+            medium={individualCard.medium}
+            sourceLink={individualCard.url}
+            culture={individualCard.culture}
             primaryimageurl={individualCard.primaryimageurl}
             onClickArtwork={this.onClickArtwork}
           />

@@ -9,6 +9,8 @@ import IndexContainer from "./components/containers/IndexContainer";
 import DetailContainer from "./components/containers/DetailContainer";
 import LoginContainer from "./components/containers/LoginContainer";
 import HomeContainer from "./components/containers/HomeContainer";
+import AnnotationContainer from "./components/containers/AnnotationContainer";
+import AboutContainer from "./components/containers/AboutContainer";
 
 
 class App extends Component {
@@ -26,6 +28,8 @@ class App extends Component {
                 routerProps={routerProps} />}/>
               <Route path="/home" component={HomeContainer} />
             <Route path="/login" component={LoginContainer} />
+            <Route path="/annotations" component={AnnotationContainer} />
+            <Route path="/about" component={AboutContainer} />
           </Switch>
       </div>
     );
@@ -40,11 +44,3 @@ function mapStateToProps(state){
 }
 
 export default withRouter(connect(mapStateToProps)(App));
-
-
-            // <Route path="/artwork" component={IndexContainer} />
-            // <Route path ={`/artwork/${this.props.selectedArtwork.apiId}`} component={DetailContainer} />
-
-            // <Route path ={`/artwork/:id`} component={DetailContainer} />
-
-            // <DetailContainer routerProps={routerProps} />} />

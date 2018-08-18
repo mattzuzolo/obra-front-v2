@@ -49,10 +49,9 @@ class IndexContainer extends Component {
     return(
       <div className="container div--index-container">
 
-        <form onSubmit={this.handleFormSubmit}>
-          <input placeholder="search for art here" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
-          <button>Click me for art</button>
-
+        <form className="form form--index" onSubmit={this.handleFormSubmit}>
+          <input placeholder="Search" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
+          <button>Submit</button>
         </form>
 
         <ArtListContainer routerProps={this.props.routerProps} localArtworkArray={this.state.localArtworkArray} />

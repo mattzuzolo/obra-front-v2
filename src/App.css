@@ -6,6 +6,10 @@ body {
   margin: 7.5%;
 }
 
+img {
+  width: 100%;
+}
+
 form {
   text-align: center;
 }
@@ -34,6 +38,10 @@ button:hover{
   background: -webkit-linear-gradient(#6f65e9, #6f65e9);
 }
 
+.source-credit {
+  font-style: italic;
+}
+
 #annotation-marker {
   position: fixed;
   z-index:2;
@@ -53,8 +61,67 @@ button:hover{
 /* ——————————————————————— */
 /* ——————————————————————— */
 
+.form--index{
+  margin: 3.5rem;
+}
 
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* ARTLIST CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
 
+.div--art-list-container{
+
+}
+
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* ARTCARD CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--art-card{
+
+  margin: 2.5rem;
+  padding: 1.5rem;
+  width: 90%;
+  border-style: solid ;
+  border-width: 1px;
+  /* border-color: #C8C8C8; GRAY*/
+  border-color: #6f65e9;
+  display:flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+  .div--art-card img{
+    width: 70%;
+  }
+
+  .div--art-card-left{
+    margin: 1rem;
+    margin-left: auto;
+  }
+
+  .div--art-card-right{
+    margin: 1rem;
+  }
+
+  .art-card-title{
+    font-size: 2.75rem;
+  }
+
+  .art-card-artist{
+    font-size: 2rem;
+  }
+
+  .art-card-detail{
+    font-size: 1.5rem;
+  }
+
+  .detail-source{
+    font-size: 1.1rem;
+  }
 
 /* ——————————————————————— */
 /* ——————————————————————— */
