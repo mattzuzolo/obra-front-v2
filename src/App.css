@@ -6,6 +6,10 @@ body {
   margin: 7.5%;
 }
 
+a {
+  color: #6f65e9;
+}
+
 img {
   width: 100%;
 }
@@ -45,6 +49,7 @@ button:hover{
 
 .source-credit {
   font-style: italic;
+  font-size: 70%;
 }
 
 #annotation-marker {
@@ -133,15 +138,14 @@ button:hover{
 /* ——————————————————————— */
 
 .div--login-container{
+  text-align: center;
+
   margin: 20%;
 
 }
 
-
-
 .form--login {
-  text-align: left;
-  float:right;
+
 }
 
 .form--login-input{
@@ -162,6 +166,7 @@ button:hover{
 
 .home-title {
   font-size: 15rem;
+  margin-bottom: -0.5rem;
   text-transform: uppercase;
   text-align: center;
   padding-top: 5rem;
@@ -170,6 +175,16 @@ button:hover{
   -webkit-text-fill-color: transparent;
 }
 
+
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* ABOUT CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--about-container{
+  font-size: 2rem;
+}
 
 
 /* ——————————————————————— */

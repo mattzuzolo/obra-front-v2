@@ -42,7 +42,7 @@ class HomeContainer extends Component {
       <div className="container div--home-container">
         <h1 className="home-title">Obra</h1>
         <form className="form form--home" onSubmit={this.handleFormSubmit}>
-          <input className="input form--home-input" placeholder="Search" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
+          <input className="input form--home-input" placeholder="Search for artwork" value={this.state.activeQuery} onChange={this.onQueryChange} ></input>
           <button className="button form--home-button">Submit</button>
         </form>
       </div>
