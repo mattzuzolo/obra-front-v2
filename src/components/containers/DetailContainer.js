@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import FullAnnotation from "../FullAnnotation"
 import AnnotationCard from "../AnnotationCard"
 
 const artworkUrl = "http://localhost:4000/artwork"
@@ -18,6 +19,7 @@ class DetailContainer extends Component {
         yCoord: 0,
         displayingMarker: false,
         annotationArray: [],
+        selectedAnnotation: {},
     }
   }
 
@@ -65,7 +67,12 @@ class DetailContainer extends Component {
       }
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => response.json())
-      .then(newAnnotation => this.setState({ annotationArray: [...this.state.annotationArray, newAnnotation]}) )
+      .then(newAnnotation => this.setState({
+        annotationArray: [...this.state.annotationArray, newAnnotation],
+        headline: "",
+        sourceLink: "",
+        content: "",
+      }) )
     }
   }
 
@@ -96,6 +103,7 @@ class DetailContainer extends Component {
       xCoord: xCoord,
       yCoord: yCoord,
       displayingMarker: true,
+      selectedAnnotation: individualAnnotation,
     });
   }
 
@@ -112,6 +120,9 @@ class DetailContainer extends Component {
 
 
   render(){
+
+    // console.log("STATE AT RENDER DETAIL", this.state.selectedAnnotation)
+
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
@@ -172,6 +183,7 @@ class DetailContainer extends Component {
           <button className="detail-form-button">Submit annotation</button>
         </form>
 
+        <FullAnnotation selectedAnnotation={this.state.selectedAnnotation} />
 
 
       </div>

@@ -257,6 +257,18 @@ button:hover{
   font-size: 2rem;
 }
 
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* FULLANNOTATION CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--full-annotation{
+  width:95%;
+  margin-bottom: 3%;
+  border: 2px solid #6f65e9;
+}
+
 
 /* ——————————————————————— */
 /* ——————————————————————— */
