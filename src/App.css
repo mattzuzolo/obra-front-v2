@@ -14,6 +14,11 @@ form {
   text-align: center;
 }
 
+label {
+  height: 5.5rem;
+  font-size:3rem;
+}
+
 input {
   height: 5.5rem;
   font-size:3rem;
@@ -71,9 +76,7 @@ button:hover{
 /* ——————————————————————— */
 /* ——————————————————————— */
 
-.div--art-list-container{
 
-}
 
 /* ——————————————————————— */
 /* ——————————————————————— */
@@ -122,6 +125,34 @@ button:hover{
   .detail-source{
     font-size: 1.1rem;
   }
+
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* LOGIN CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--login-container{
+  margin: 20%;
+
+}
+
+
+
+.form--login {
+  text-align: left;
+  float:right;
+}
+
+.form--login-input{
+  margin: 2rem;
+}
+
+.button--login{
+
+}
+
+
 
 /* ——————————————————————— */
 /* ——————————————————————— */

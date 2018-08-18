@@ -36,16 +36,16 @@ class LoginContainer extends Component {
 
   render(){
     return(
-      <div>
-      <form onSubmit={this.onLoginSubmit}>
-        <label>Username:</label>
-        <input placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange} ></input>
-
-        <label>Password:</label>
-        <input placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange} ></input>
-
-        <button>Login!!!</button>
-      </form>
+      <div className="container div--login-container">
+        <form className="form form--login" onSubmit={this.onLoginSubmit}>
+          <label>Username:</label>
+          <input className="input form--login-input" placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange} ></input>
+          <br/>
+          <label>Password:</label>
+          <input className="input form--login-input" placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange} ></input>
+          <br/>
+          <button className="button button--login">Login</button>
+        </form>
       </div>
     )
   }
