@@ -198,6 +198,16 @@ button:hover{
 /* ——————————————————————— */
 /* ——————————————————————— */
 
+.login-title{
+  font-size: 7rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 5rem;
+  background: -webkit-linear-gradient(#6f65e9, #667eea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .div--login-container{
   text-align: center;
 

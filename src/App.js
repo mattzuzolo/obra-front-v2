@@ -25,15 +25,17 @@ class App extends Component {
                 return <DetailContainer routerProps={routerProps} paramsId={paramsId}/>
               }} />
             <Route path="/artwork" render={(routerProps) => <IndexContainer
-                routerProps={routerProps} />}/>
-            <Route path="/home" component={HomeContainer} />
-            <Route path="/login" component={LoginContainer} />
+              routerProps={routerProps} />}/>
+            <Route path="/home" render={(routerProps) => <HomeContainer
+              routerProps={routerProps} />}/>
             <Route path="/annotations" component={AnnotationContainer} />
             <Route path="/about" component={AboutContainer} />
+            <Route path="/login" component={LoginContainer} />
           </Switch>
       </div>
     );
   }
+
 }
 
 function mapStateToProps(state){

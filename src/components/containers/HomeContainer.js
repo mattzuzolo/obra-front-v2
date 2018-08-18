@@ -32,9 +32,13 @@ class HomeContainer extends Component {
 
     fetch(apiEndpointBaseURL + "?" + searchString)
       .then(response => response.json())
-      .then(data => filterForImageLinkPresent(data.records))
+      .then(data => this.filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
-      .then(console.log)
+      .then(this.props.routerProps.history.push("/artwork"))
+  }
+
+  filterForImageLinkPresent = (data) => {
+    return data.filter(individualWork => individualWork.primaryimageurl !== null )
   }
 
   render(){
@@ -64,8 +68,6 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-let filterForImageLinkPresent = (data) => {
-  return data.filter(individualWork => individualWork.primaryimageurl !== null )
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
