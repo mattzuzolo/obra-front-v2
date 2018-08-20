@@ -29,25 +29,19 @@ class LoginContainer extends Component {
       Accept: "application/json",
        method: "POST",
        headers: {
-         "Content-type": "application/json"
+         "Content-type": "application/json",
+         "Access-Control-Allow-Headers": "x-auth"
        },
        body: JSON.stringify(loginPostBody)
      };
 
     fetch("http://localhost:4000/users/login", loginPostConfig)
-      .then(response => response.json())
-      .then(loggedInUser => console.log("LOGGED IN USER", loggedInUser))
+    .then(console.log)
+    // .then(response => response.json())
+      // .then(loggedInUser => console.log("loggedInUser", loggedInUser))
+      // .then(loggedInUser => this.props.loginUser(loggedInUser))
       .catch(error => console.log("ERROR DURING FETCH: ", error))
   }
-
-  // onLoginSubmit = (event) => {
-  //   event.preventDefault();
-  //   fetch("http://localhost:4000/users")
-  //     .then(response => response.json())
-  //     .then(data => this.findUser(data))
-  //     .then(foundUser => this.props.loginUser(foundUser))
-  //     .catch(error => console.log("ERROR DURING FETCH: ", error))
-  // }
 
   findUser = (data) => {
     let foundUser = data.users.find(indivdualUser => indivdualUser.email === this.state.email);
