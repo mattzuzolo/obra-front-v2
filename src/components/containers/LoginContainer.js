@@ -19,12 +19,35 @@ class LoginContainer extends Component {
 
   onLoginSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4000/users")
+
+    let loginPostBody = {
+      email: this.state.email,
+      password: this.state.password,
+    }
+
+    let loginPostConfig = {
+      Accept: "application/json",
+       method: "POST",
+       headers: {
+         "Content-type": "application/json"
+       },
+       body: JSON.stringify(loginPostBody)
+     };
+
+    fetch("http://localhost:4000/users/login", loginPostConfig)
       .then(response => response.json())
-      .then(data => this.findUser(data))
-      .then(foundUser => this.props.loginUser(foundUser))
+      .then(loggedInUser => console.log("LOGGED IN USER", loggedInUser))
       .catch(error => console.log("ERROR DURING FETCH: ", error))
   }
+
+  // onLoginSubmit = (event) => {
+  //   event.preventDefault();
+  //   fetch("http://localhost:4000/users")
+  //     .then(response => response.json())
+  //     .then(data => this.findUser(data))
+  //     .then(foundUser => this.props.loginUser(foundUser))
+  //     .catch(error => console.log("ERROR DURING FETCH: ", error))
+  // }
 
   findUser = (data) => {
     let foundUser = data.users.find(indivdualUser => indivdualUser.email === this.state.email);
