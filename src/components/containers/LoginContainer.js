@@ -39,7 +39,9 @@ class LoginContainer extends Component {
       .then(response => response.json())
       .then(json => {
         localStorage.setItem("token", json.token)
+        // this.props.loggedInUser()
         this.props.history.push("/artwork");
+
       })
       .catch(error => console.log("ERROR DURING FETCH: ", error))
   }
