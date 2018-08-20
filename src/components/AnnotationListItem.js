@@ -11,7 +11,7 @@ class AnnotationListItem extends Component {
   }
 
   render(){
-    console.log("individualAnnotation", this.props.individualAnnotation.artwork[0].primaryimageurl)
+    // console.log("individualAnnotation", this.props.individualAnnotation.artwork[0].primaryimageurl)
     return(
       <div onClick={(event) => this.props.onClickAnnotation(event, this.props.individualAnnotation.artwork[0])} className="div--annotation-list-item">
 

@@ -30,17 +30,28 @@ class LoginContainer extends Component {
        method: "POST",
        headers: {
          "Content-type": "application/json",
-         "Access-Control-Allow-Headers": "x-auth"
+         "Access-Control-Expose-Headers": "x-auth"
        },
        body: JSON.stringify(loginPostBody)
      };
 
     fetch("http://localhost:4000/users/login", loginPostConfig)
-    .then(console.log)
+      // .then(console.log(Header.get("x-auth")))
+      // .then(response => response.json())
+      // .then(console.log)
+      .then(response => response.json())
+      .then(data => console.log("RESULT:", data))
+      // .then(json => console.log("JSON", json))
+      // .then(json =>{
+      //   localStorage.setItem("token", json["x-auth"])
+      // })
+      .catch(error => console.log("ERROR DURING FETCH: ", error))
+    // .then(console.log)
     // .then(response => response.json())
+    // .then(data => console.log("RESPONSE.JSON()", data))
       // .then(loggedInUser => console.log("loggedInUser", loggedInUser))
       // .then(loggedInUser => this.props.loginUser(loggedInUser))
-      .catch(error => console.log("ERROR DURING FETCH: ", error))
+
   }
 
   findUser = (data) => {
