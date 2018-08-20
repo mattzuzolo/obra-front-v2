@@ -36,22 +36,12 @@ class LoginContainer extends Component {
      };
 
     fetch("http://localhost:4000/users/login", loginPostConfig)
-      // .then(console.log(Header.get("x-auth")))
-      // .then(response => response.json())
-      // .then(console.log)
       .then(response => response.json())
-      .then(data => console.log("RESULT:", data))
-      // .then(json => console.log("JSON", json))
-      // .then(json =>{
-      //   localStorage.setItem("token", json["x-auth"])
-      // })
+      .then(json => {
+        localStorage.setItem("token", json.token)
+        this.props.history.push("/artwork");
+      })
       .catch(error => console.log("ERROR DURING FETCH: ", error))
-    // .then(console.log)
-    // .then(response => response.json())
-    // .then(data => console.log("RESPONSE.JSON()", data))
-      // .then(loggedInUser => console.log("loggedInUser", loggedInUser))
-      // .then(loggedInUser => this.props.loginUser(loggedInUser))
-
   }
 
   findUser = (data) => {
