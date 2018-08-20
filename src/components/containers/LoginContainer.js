@@ -6,7 +6,7 @@ class LoginContainer extends Component {
     super(props);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
     }
   }
@@ -27,7 +27,7 @@ class LoginContainer extends Component {
   }
 
   findUser = (data) => {
-    let foundUser = data.users.find(indivdualUser => indivdualUser.username === this.state.username);
+    let foundUser = data.users.find(indivdualUser => indivdualUser.email === this.state.email);
     if (!foundUser){
       throw new Error("Login attempt failed.");
     }
@@ -40,8 +40,8 @@ class LoginContainer extends Component {
         <h1 className="login-title">Login:</h1>
         <form className="form form--login" onSubmit={this.onLoginSubmit}>
           <div className="login-form-elements">
-            <label>Username:</label>
-            <input className="input form--login-input" placeholder="username" name="username" value={this.state.username} onChange={this.onInputChange} ></input>
+            <label>Email:</label>
+            <input className="input form--login-input" placeholder="email" name="email" value={this.state.email} onChange={this.onInputChange} ></input>
             <br/>
             <label>Password:</label>
             <input className="input form--login-input" placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange} ></input>

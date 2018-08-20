@@ -3,7 +3,7 @@ const defaultState = {
   selectedArtwork: {},
   loggedInUser: {
     _id: "5b7464d118664e1696ee9a46",
-    username: "matt",
+    email: "matt@gmail.com",
     password: "matt1234",
     __v: 0
 },
