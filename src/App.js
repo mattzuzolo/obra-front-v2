@@ -11,6 +11,8 @@ import LoginContainer from "./components/containers/LoginContainer";
 import HomeContainer from "./components/containers/HomeContainer";
 import AnnotationContainer from "./components/containers/AnnotationContainer";
 import AboutContainer from "./components/containers/AboutContainer";
+import RegisterContainer from "./components/containers/RegisterContainer";
+
 
 
 class App extends Component {
@@ -32,6 +34,7 @@ class App extends Component {
               routerProps={routerProps} />}/>
             <Route path="/about" component={AboutContainer} />
             <Route path="/login" component={LoginContainer} />
+            <Route path="/register" component={RegisterContainer} />
           </Switch>
       </div>
     );
