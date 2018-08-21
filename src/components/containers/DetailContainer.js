@@ -93,7 +93,8 @@ class DetailContainer extends Component {
       Accept: "application/json",
         method: "POST",
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
+          "x-auth": localStorage.getItem("token")
         },
         body: JSON.stringify(annotationPostSubmissionBody)
     }
@@ -169,7 +170,8 @@ class DetailContainer extends Component {
     fetch(urlWithId, {
         method: 'DELETE',
         headers: {
-          "Content-type": "application/json"
+          "Content-type": "application/json",
+          "x-auth": localStorage.getItem("token"),
         }
       });
   }

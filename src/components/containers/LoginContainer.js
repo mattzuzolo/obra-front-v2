@@ -30,7 +30,7 @@ class LoginContainer extends Component {
        method: "POST",
        headers: {
          "Content-type": "application/json",
-         "Access-Control-Expose-Headers": "x-autoh"
+         "Access-Control-Expose-Headers": "x-auth"
        },
        body: JSON.stringify(loginPostBody)
      };

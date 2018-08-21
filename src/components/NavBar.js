@@ -19,7 +19,6 @@ class NavBar extends Component {
         <Link className="nav-item div--nav-bar-item logo" to="/home">Obra</Link>
         <Link className="nav-item div--nav-bar-item" to="/artwork">Artwork</Link>
         <Link className="nav-item div--nav-bar-item" to="/annotations">Annotations</Link>
-
           { localStorage.getItem("token")
                     ?
                     <button className="nav-item div--nav-bar-item nav-right" onClick={this.logout}>Logout</button>
@@ -29,10 +28,6 @@ class NavBar extends Component {
                       <Link className="nav-item div--nav-bar-item nav-right" to="/login">Login</Link>
                     </Fragment>
           }
-
-
-
-
         <Link className="nav-item div--nav-bar-item nav-right" to="/about">About</Link>
       </div>
     )
