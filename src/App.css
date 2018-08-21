@@ -72,8 +72,8 @@ button:hover{
 }
 
 #annotation-marker {
-  position: fixed;
-  z-index:2;
+  position: absolute;
+  z-index: 500;
   border: 5px solid #39ff14;
   border-radius: 100px;
   height:100px;
@@ -443,6 +443,7 @@ button:hover{
 /* ——————————————————————— */
 /* ——————————————————————— */
 .div--nav-bar {
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;

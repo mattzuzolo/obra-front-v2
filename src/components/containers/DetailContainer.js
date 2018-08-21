@@ -50,10 +50,16 @@ class DetailContainer extends Component {
   }
 
   onArtworkClick = (event) => {
+
+    event.persist();
+    console.log("CLICK EVENT!", event)
     // getBoundingClientRect() method returns the size of an element and its position relative to the viewport.
-    let currentTargetRect = event.currentTarget.getBoundingClientRect(); //figure how to use this later. Useful for reconstructing event?
-    let xCoord = event.pageX - currentTargetRect.left;
-    let yCoord = event.pageY - currentTargetRect.top;
+    // let currentTargetRect = event.currentTarget.getBoundingClientRect(); //figure how to use this later. Useful for reconstructing event?
+    // let xCoord = event.pageX - currentTargetRect.left;
+    // let yCoord = event.pageY - currentTargetRect.top;
+
+    let xCoord = event.clientX - 50;// - currentTargetRect.left;
+    let yCoord = event.clientY - 50;// - currentTargetRect.top;
 
     this.setState({
       xCoord: xCoord,
@@ -178,13 +184,15 @@ class DetailContainer extends Component {
 
 
   render(){
-    // console.log("STATE AT RENDER", this.state)
+    console.log("STATE AT RENDER", this.state)
 
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
-      position: "absolute",
+      // position: "absolute",
     }
+
+    console.log("annotationMarkerStyle", annotationMarkerStyle)
 
     return(
       <div className="container div--detail-container">
