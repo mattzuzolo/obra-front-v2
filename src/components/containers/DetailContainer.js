@@ -147,8 +147,8 @@ class DetailContainer extends Component {
     let updateConfig = {
       method: 'PUT',
       headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        "x-auth": localStorage.getItem("token"),
       },
       body: JSON.stringify(updateSubmissionBody)
     }

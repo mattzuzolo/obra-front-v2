@@ -36,7 +36,8 @@ class App extends Component {
   render() {
     return (
       <div className="container div--app App">
-        <Route path="/" component={NavBar} />
+        <Route path="/" render={(routerProps) => <NavBar
+          {...routerProps} />}/>
           <Switch>
             <Route path ={`/artwork/:id`} render={(routerProps) => {
                 let paramsId = routerProps.match.params.id;
