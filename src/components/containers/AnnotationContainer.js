@@ -19,7 +19,8 @@ class AnnotationContainer extends Component {
   componentDidMount(){
     fetch(annotationWithArtworkUrl)
       .then(response => response.json())
-      .then(annotationArray => this.setState({fetchedAnnotations: annotationArray.annotation}))
+      .then(data => this.setState({fetchedAnnotations: data.annotation}))
+      .catch(console.error)
   }
 
   onQueryChange = (event) => {
@@ -32,15 +33,16 @@ class AnnotationContainer extends Component {
   }
 
   render(){
+    console.log("ANNOTATION CONTAINER STATE", this.state.fetchedAnnotations[1])
     return(
       <div className="container div--index-container">
-          {this.state.fetchedAnnotations.map(individualAnnotation => (
-            <AnnotationListItem
-              individualAnnotation={individualAnnotation}
-              onClickAnnotation={this.onClickAnnotation}
-              />
-          ))}
-
+        {this.state.fetchedAnnotations.map(individualAnnotation => (
+          <AnnotationListItem
+            key={individualAnnotation._id}
+            individualAnnotation={individualAnnotation}
+            onClickAnnotation={this.onClickAnnotation}
+          />
+        ))}
       </div>
     );
   }
@@ -64,3 +66,8 @@ function mapDispatchToProps(dispatch){
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnnotationContainer);
+
+// <AnnotationListItem
+//   individualAnnotation={individualAnnotation}
+//   onClickAnnotation={this.onClickAnnotation}
+// />

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+
 
 import AnnotationCard from "../AnnotationCard"
 import FullAnnotation from "../FullAnnotation"
@@ -201,17 +202,17 @@ class DetailContainer extends Component {
                 <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
               </div>
               <hr/>
+
+              <h2>Create an annotation:</h2>
               <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
                 <div className="detail-form-small-inputs">
 
                   <label className="detail-form-label">Headline:</label>
-                  <br/>
                   <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
-                  <br/>
+
                   <label className="detail-form-label">Link:</label>
-                  <br/>
                   <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
-                  <br/>
+
                 </div>
                   <label className="detail-form-label">Annotation:</label>
                   <br/>

@@ -11,9 +11,8 @@ class AnnotationListItem extends Component {
   }
 
   render(){
-    // console.log("individualAnnotation", this.props.individualAnnotation.artwork[0].primaryimageurl)
     return(
-      <div onClick={(event) => this.props.onClickAnnotation(event, this.props.individualAnnotation.artwork[0])} className="div--annotation-list-item">
+        <div onClick={(event) => this.props.onClickAnnotation(event, this.props.individualAnnotation.artwork[0])} className="div--annotation-list-item">
 
         <div className="div--annotation-list-item-left">
           <img src={this.props.individualAnnotation.artwork[0].primaryimageurl} alt="thumbail"></img>
@@ -33,7 +32,6 @@ class AnnotationListItem extends Component {
             <h3 className="[h3] annotation-list-item-content"> {this.truncateString(this.props.individualAnnotation.content)}</h3>
           </div>
         </div>
-
       </div>
     );
   }

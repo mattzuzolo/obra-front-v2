@@ -149,24 +149,28 @@ button:hover{
 }
   .detail-form-small-inputs{
     display: flex;
-
   }
     .detail-form-input{
       margin-top: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       height: 2rem;
       font-size: 1.5rem;
+      margin-right: 1.5rem;
     }
 
     .detail-form-label{
+      margin-top: 1rem;
       font-size: 1.5rem;
+      vertical-align: center;
+      margin-right: 0.75rem;
     }
 
   .detail-form-button  {
     margin-left: 0rem;
     margin-top: 1rem;
-    height: 2rem;
+    height: 2.75rem;
     font-size: 1.5rem;
+    /* padding: 1rem; */
   }
 
   .detail-form-textarea  {
@@ -177,8 +181,8 @@ button:hover{
   }
 
   .div--artwork-info button {
-    margin-left: 0rem;
-    margin-top: 1rem;
+    /* margin-left: 0rem;
+    margin-top: 1rem; */
   }
 
 /* ——————————————————————— */
@@ -323,6 +327,7 @@ button:hover{
 
 .div--full-annotation{
   /* margin: 7.5%; */
+  border-radius: 1rem;
   border: 2px solid #6f65e9;
   padding: 3rem;
 }
