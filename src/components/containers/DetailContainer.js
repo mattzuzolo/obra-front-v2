@@ -27,11 +27,13 @@ class DetailContainer extends Component {
 
   componentDidMount(){
 
+    //fetches a specific artwork based on URL params
     fetch(`http://localhost:4000/artwork/${this.props.paramsId}`)
       .then(response => response.json())
       .then(foundArtwork => this.props.selectArtwork(foundArtwork.artwork))
       .catch(console.error)
 
+    //Fetches annotation list for the specific work displayed
     fetch(annotationUrl)
       .then(response => response.json())
       .then(data => this.filterAnnotationsByArtwork(data.annotations))
@@ -39,6 +41,7 @@ class DetailContainer extends Component {
       .catch(console.error)
   }
 
+  //only displays annotations for the selected artwork
   filterAnnotationsByArtwork = (annotationData) => {
     return annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
   }
@@ -49,6 +52,7 @@ class DetailContainer extends Component {
     this.setState({ [fieldName]: currentValue })
   }
 
+  //Updates state with the coordinates of most recent click for annotation coordinates
   onArtworkClick = (event) => {
     let xCoord = event.clientX - 50;
     let yCoord = event.clientY - 50;
@@ -56,9 +60,11 @@ class DetailContainer extends Component {
     this.setState({
       xCoord: xCoord,
       yCoord: yCoord,
+      //displays the hidden annotation marker so user can see location
       displayingMarker: true,
     })
   }
+
 
   onAnnotationSubmit = (event) => {
     event.preventDefault();
@@ -72,9 +78,10 @@ class DetailContainer extends Component {
         xCoord: this.state.xCoord,
         yCoord: this.state.yCoord,
       }
+
+      //Posts annotation to server. Then optimistically renders the new annotation
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => response.json())
-      .then(newAnnotation => console.log("NEW ANNOTATION", newAnnotation))
       .catch(console.error)
       // .then(newAnnotation => this.setState({
       //   annotationArray: [...this.state.annotationArray, newAnnotation],
@@ -96,12 +103,12 @@ class DetailContainer extends Component {
         },
         body: JSON.stringify(annotationPostSubmissionBody)
     }
-
     return fetch(annotationUrl, postAnnotationConfig);
   }
 
 
-
+  //Triggers when user selects specific annotation
+  //Displays/moves annotation marker tied to the chosen annotation
   onAnnotationCardClick = (event, individualAnnotation) => {
     let xCoord = individualAnnotation.xCoord;
     let yCoord = individualAnnotation.yCoord;
@@ -116,6 +123,7 @@ class DetailContainer extends Component {
     });
   }
 
+  //Displays edit form when update button is clicked inside FullAnnotation component
   onAnnotationUpdateFormDisplay = (event) => {
     event.persist();
     event.preventDefault();
@@ -126,6 +134,7 @@ class DetailContainer extends Component {
     });
   }
 
+  //Send PUT request to server with updated information
   onAnnotationUpdateSubmit = (event, formState) => {
     event.preventDefault();
 
@@ -141,8 +150,6 @@ class DetailContainer extends Component {
         yCoord: formState.yCoord,
     }
 
-    console.log("updateSubmissionBody", updateSubmissionBody);
-
     let updateConfig = {
       method: 'PUT',
       headers: {
@@ -152,16 +159,10 @@ class DetailContainer extends Component {
       body: JSON.stringify(updateSubmissionBody)
     }
 
-    console.log("URL TO FETCH", updateUrl)
-    console.log("UPDATE FECTH", updateConfig);
-
     fetch(updateUrl, updateConfig)
       .then(response => response.json())
-      .then(data => console.log("RETURNED FROM UPDATE", data))
       .catch(console.error)
   }
-
-
 
   onAnnotationCardDelete = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
@@ -176,21 +177,18 @@ class DetailContainer extends Component {
 
 
   render(){
-    console.log("STATE AT RENDER", this.state)
-
+    //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,
       left: this.state.xCoord,
-      // position: "absolute",
     }
-
-    console.log("annotationMarkerStyle", annotationMarkerStyle)
 
     return(
       <div className="container div--detail-container">
 
         <div className="div--art-annotations-container">
           <div className="annotation-zone">
+            {/*Annotation marker is invisible until user actions displays it via state*/}
               { this.state.displayingMarker
                         ? <div id="annotation-marker" style={annotationMarkerStyle} ></div>
                         : null
@@ -241,7 +239,7 @@ class DetailContainer extends Component {
           </div>
         </div>
 
-
+        {/*Displays full annotation when clicked via state*/}
         { this.state.displayingFullAnnotation
                   ? <FullAnnotation
                     selectedAnnotation={this.state.selectedAnnotation}
@@ -251,6 +249,7 @@ class DetailContainer extends Component {
                   : null
         }
 
+        {/*Displays update/edit form when clicked via state*/}
         { this.state.displayingEditForm
                   ? <EditForm
                     selectedAnnotation={this.state.selectedAnnotation}
@@ -261,11 +260,6 @@ class DetailContainer extends Component {
                     />
                   : null
         }
-
-
-
-
-
       </div>
     )
   }

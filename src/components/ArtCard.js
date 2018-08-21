@@ -11,6 +11,8 @@ class ArtCard extends Component {
 
         <div className="div--art-card-right">
           <h1 className="h1 art-card-title">{this.props.title}</h1>
+
+        {/*Not all works have an artist attached. Only displays existing artists*/}
             { this.props.artist
                       ? <h3 className="h3 art-card-artist">{this.props.artist}</h3>
                       : null
