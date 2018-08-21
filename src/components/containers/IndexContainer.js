@@ -15,7 +15,8 @@ class IndexContainer extends Component {
   componentDidMount(){
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
-      .then(data => this.props.updateArtworkArray(data.artwork));
+      .then(data => this.props.updateArtworkArray(data.artwork))
+      .catch(console.error);
   }
 
   onQueryChange = (event) => {
@@ -41,6 +42,7 @@ class IndexContainer extends Component {
       .then(response => response.json())
       .then(data => this.filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
+      .catch(console.error);
   }
 
   render(){

@@ -30,7 +30,7 @@ class LoginContainer extends Component {
        method: "POST",
        headers: {
          "Content-type": "application/json",
-         "Access-Control-Expose-Headers": "x-auth"
+         "Access-Control-Expose-Headers": "x-autoh"
        },
        body: JSON.stringify(loginPostBody)
      };
@@ -38,7 +38,9 @@ class LoginContainer extends Component {
     fetch("http://localhost:4000/users/login", loginPostConfig)
       .then(response => response.json())
       .then(json => {
+        console.log("JSON", json._doc)
         localStorage.setItem("token", json.token)
+        this.props.loginUser(json._doc)
         // this.props.loggedInUser()
         this.props.history.push("/artwork");
 

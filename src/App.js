@@ -17,6 +17,22 @@ import RegisterContainer from "./components/containers/RegisterContainer";
 
 class App extends Component {
 
+  componentDidMount(){
+    fetch("http://localhost:4000/current", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth": localStorage.getItem("token")
+      }
+    })
+      .then(response => response.json())
+      .then(foundUser => this.props.loginUser(foundUser.user))
+      .catch(error => {
+        localStorage.removeItem("token");
+        this.props.history.push("/login")
+      })
+  }
+
   render() {
     return (
       <div className="container div--app App">
@@ -49,4 +65,12 @@ function mapStateToProps(state){
   }
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+function mapDispatchToProps(dispatch){
+  return {
+    loginUser: (user => {
+      dispatch({type: "LOGIN_USER", payload: user})
+    }),
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

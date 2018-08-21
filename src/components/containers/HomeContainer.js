@@ -35,6 +35,7 @@ class HomeContainer extends Component {
       .then(data => this.filterForImageLinkPresent(data.records))
       .then(dataArray => this.props.updateArtworkArray(dataArray))
       .then(this.props.routerProps.history.push("/artwork"))
+      .catch(console.error)
   }
 
   filterForImageLinkPresent = (data) => {
