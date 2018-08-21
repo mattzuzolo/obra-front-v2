@@ -83,14 +83,13 @@ class DetailContainer extends Component {
       //Posts annotation to server. Then optimistically renders the new annotation
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => response.json())
+      .then(newAnnotation => this.setState({
+        annotationArray: [...this.state.annotationArray, newAnnotation],
+        headline: "",
+        sourceLink: "",
+        content: "",
+      }) )
       .catch(console.error)
-      // .then(newAnnotation => this.setState({
-      //   annotationArray: [...this.state.annotationArray, newAnnotation],
-      //   headline: "",
-      //   sourceLink: "",
-      //   content: "",
-      // }) )
-
     }
   }
 
