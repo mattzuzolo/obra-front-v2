@@ -22,11 +22,11 @@ class NavBar extends Component {
           {/*change NavBar options depending on if a user is logged in*/}
           { localStorage.getItem("token")
                     ?
-                    <button className="nav-item div--nav-bar-item nav-right" onClick={this.logout}>Logout</button>
+                    <button className="nav-item div--nav-bar-item nav-right button-logout" onClick={this.logout}>Logout</button>
                     :
                     <Fragment>
                       <Link className="nav-item div--nav-bar-item nav-right" to="/register">Register</Link>
-                      <Link className="nav-item div--nav-bar-item button-logout nav-right" to="/login">Login</Link>
+                      <Link className="nav-item div--nav-bar-item nav-right" to="/login">Login</Link>
                     </Fragment>
           }
         <Link className="nav-item div--nav-bar-item nav-right" to="/about">About</Link>

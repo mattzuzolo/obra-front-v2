@@ -479,3 +479,16 @@ button:hover{
     .nav-right {
       float: right;
     }
+
+    .button-logout  {
+      background:none;
+      border:none;
+      margin:0;
+      padding:0;
+      margin-right: 1.5rem;
+    }
+
+    .button-logout:hover  {
+      background:none;
+      border:none;
+    }
