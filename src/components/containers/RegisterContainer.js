@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class RegisterContainer extends Component {
   constructor(props){
@@ -36,8 +35,7 @@ class RegisterContainer extends Component {
 
     fetch("http://localhost:4000/users", newUserPostConfig)
       .then(response => response.json())
-      .then(newUser => console.log("NEWLY CREATED USER", newUser))
-      .catch(error => console.log("ERROR DURING FETCH: ", error))
+      .catch(error => console.error)
   }
 
   render(){
@@ -50,7 +48,7 @@ class RegisterContainer extends Component {
             <input className="input form--login-input" placeholder="email" name="email" value={this.state.email} onChange={this.onInputChange} ></input>
             <br/>
             <label>Password:</label>
-            <input className="input form--login-input" placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange} ></input>
+            <input className="input form--login-input" placeholder="password" name="password" type="password" value={this.state.password} onChange={this.onInputChange} ></input>
             <br/>
             <button className="button button--login">Login</button>
           </div>
@@ -61,19 +59,3 @@ class RegisterContainer extends Component {
 }
 
 export default RegisterContainer
-
-// function mapStateToProps(state){
-//   return {
-//     loggedInUser: state.loggedInUser,
-//   }
-// }
-//
-// function mapDispatchToProps(dispatch){
-//   return {
-//     loginUser: (user => {
-//       dispatch({type: "LOGIN_USER", payload: user})
-//     }),
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);

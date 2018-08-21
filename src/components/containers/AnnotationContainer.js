@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 
 import AnnotationListItem from "../AnnotationListItem"
 
-
+//This url provides access to annotations with full artwork objects
 const annotationWithArtworkUrl = "http://localhost:4000/annotations-artwork";
-
 
 class AnnotationContainer extends Component {
     constructor(props){
@@ -20,7 +19,6 @@ class AnnotationContainer extends Component {
   componentDidMount(){
     fetch(annotationWithArtworkUrl)
       .then(response => response.json())
-      // .then(data => console.log("with artwork data", data.annotation))
       .then(annotationArray => this.setState({fetchedAnnotations: annotationArray.annotation}))
   }
 

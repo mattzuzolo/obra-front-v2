@@ -30,7 +30,6 @@ class LoginContainer extends Component {
        method: "POST",
        headers: {
          "Content-type": "application/json",
-         "Access-Control-Expose-Headers": "x-auth"
        },
        body: JSON.stringify(loginPostBody)
      };
@@ -38,22 +37,11 @@ class LoginContainer extends Component {
     fetch("http://localhost:4000/users/login", loginPostConfig)
       .then(response => response.json())
       .then(json => {
-        console.log("JSON", json._doc)
         localStorage.setItem("token", json.token)
         this.props.loginUser(json._doc)
-        // this.props.loggedInUser()
         this.props.history.push("/artwork");
-
       })
-      .catch(error => console.log("ERROR DURING FETCH: ", error))
-  }
-
-  findUser = (data) => {
-    let foundUser = data.users.find(indivdualUser => indivdualUser.email === this.state.email);
-    if (!foundUser){
-      throw new Error("Login attempt failed.");
-    }
-    return foundUser;
+      .catch(console.error)
   }
 
   render(){
@@ -66,7 +54,7 @@ class LoginContainer extends Component {
             <input className="input form--login-input" placeholder="email" name="email" value={this.state.email} onChange={this.onInputChange} ></input>
             <br/>
             <label>Password:</label>
-            <input className="input form--login-input" placeholder="password" name="password" value={this.state.password} onChange={this.onInputChange} ></input>
+            <input className="input form--login-input" placeholder="password" name="password" type="password" value={this.state.password} onChange={this.onInputChange} ></input>
             <br/>
             <button className="button button--login">Login</button>
           </div>

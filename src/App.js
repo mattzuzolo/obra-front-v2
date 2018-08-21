@@ -13,10 +13,9 @@ import AnnotationContainer from "./components/containers/AnnotationContainer";
 import AboutContainer from "./components/containers/AboutContainer";
 import RegisterContainer from "./components/containers/RegisterContainer";
 
-
-
 class App extends Component {
 
+  //Check token to see identity of current user
   componentDidMount(){
     fetch("http://localhost:4000/current", {
       method: "GET",
@@ -28,6 +27,7 @@ class App extends Component {
       .then(response => response.json())
       .then(foundUser => this.props.loginUser(foundUser.user))
       .catch(error => {
+        //Remove token and send user to Login if token is not found
         localStorage.removeItem("token");
         this.props.history.push("/login")
       })

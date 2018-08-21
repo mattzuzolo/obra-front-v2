@@ -50,16 +50,8 @@ class DetailContainer extends Component {
   }
 
   onArtworkClick = (event) => {
-
-    event.persist();
-    console.log("CLICK EVENT!", event)
-    // getBoundingClientRect() method returns the size of an element and its position relative to the viewport.
-    // let currentTargetRect = event.currentTarget.getBoundingClientRect(); //figure how to use this later. Useful for reconstructing event?
-    // let xCoord = event.pageX - currentTargetRect.left;
-    // let yCoord = event.pageY - currentTargetRect.top;
-
-    let xCoord = event.clientX - 50;// - currentTargetRect.left;
-    let yCoord = event.clientY - 50;// - currentTargetRect.top;
+    let xCoord = event.clientX - 50;
+    let yCoord = event.clientY - 50;
 
     this.setState({
       xCoord: xCoord,
