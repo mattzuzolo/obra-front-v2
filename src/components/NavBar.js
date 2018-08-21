@@ -19,7 +19,7 @@ class NavBar extends Component {
         <Link className="nav-item div--nav-bar-item" to="/artwork">Artwork</Link>
         <Link className="nav-item div--nav-bar-item" to="/annotations">Annotations</Link>
 
-        //change NavBar options depending on if a user is logged in
+          {/*change NavBar options depending on if a user is logged in*/}
           { localStorage.getItem("token")
                     ?
                     <button className="nav-item div--nav-bar-item nav-right" onClick={this.logout}>Logout</button>

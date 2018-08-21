@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import ArtCard from "../ArtCard"
 
 const artworkUrl = "http://localhost:4000/artwork"
 
 class ArtListContainer extends Component {
-  
+
+  //POST new work to /artwork
   postArtwork = () => {
     let artworkPostSubmissionBody = {
       title: this.props.selectedArtwork.title,
@@ -30,16 +32,19 @@ class ArtListContainer extends Component {
     return fetch(artworkUrl, postArtworkConfig);
   }
 
+  //Runs when user selects an artwork from the fetched list
   onClickArtwork = (event, selectedArtwork) => {
     //check to see if artwork exists in internal database
     fetch(`http://localhost:4000/artwork/`)
       .then(response => response.json())
       .then(data => this.findArtworkById(data.artwork, selectedArtwork))
       .then(foundWork => {
+        //if artwork is found, swap for interal version and send user to detail
         if(foundWork){
           this.props.routerProps.history.push(`/artwork/${foundWork.id}`)
           return this.props.selectArtwork(foundWork);
         }
+        //if not found, save to internal database and send user to detail
         else {
           this.props.selectArtwork(selectedArtwork);
           this.postArtwork()
@@ -50,6 +55,7 @@ class ArtListContainer extends Component {
       .catch(console.error)
   }
 
+  //checks to see if artwork exists interally
   findArtworkById = (fetchedArray, selectedArtwork) => {
     return fetchedArray.find(individualArtwork => individualArtwork.id === parseInt(selectedArtwork.id, 10))
   }

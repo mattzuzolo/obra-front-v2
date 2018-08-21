@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ArtListContainer from "./ArtListContainer"
-let querystring = require('querystring')
+
+const querystring = require('querystring')
+
+
 
 class IndexContainer extends Component {
     constructor(props){
@@ -11,7 +14,7 @@ class IndexContainer extends Component {
         activeQuery: "",
       }
     }
-//
+
   componentDidMount(){
     fetch("http://localhost:4000/artwork")
       .then(response => response.json())
@@ -23,6 +26,7 @@ class IndexContainer extends Component {
     this.setState({ activeQuery: event.target.value })
   }
 
+  //this method filters out artwork from API without an image link
   filterForImageLinkPresent = (data) => {
     return data.filter(individualWork => individualWork.primaryimageurl !== null )
   }
@@ -30,6 +34,7 @@ class IndexContainer extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
 
+    //Grabs the query from state to send to external API
     let submittedQuery = this.state.activeQuery;
     var apiEndpointBaseURL = "https://api.harvardartmuseums.org/object";
     let searchString = querystring.stringify({
@@ -38,6 +43,7 @@ class IndexContainer extends Component {
       classification: "Paintings"
     })
 
+    //Fetch external data --> filter out response data with no image link --> save to redux array for display later on
     fetch(apiEndpointBaseURL + "?" + searchString)
       .then(response => response.json())
       .then(data => this.filterForImageLinkPresent(data.records))
