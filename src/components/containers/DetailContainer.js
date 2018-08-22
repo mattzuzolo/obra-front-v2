@@ -178,7 +178,6 @@ class DetailContainer extends Component {
       .catch(error => {
         alert("You can only update your own annotations.")
       })
-      .catch(console.error)
   }
 
   //Optimistically render the fetched update
