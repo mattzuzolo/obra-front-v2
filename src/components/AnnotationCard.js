@@ -11,7 +11,7 @@ class AnnotationCard extends Component {
   }
 
   render(){
-    console.log("ANNOTATION CARD PROPS", this.props)
+    // console.log("ANNOTATION CARD PROPS", this.props)
 
     let borderStyle ={}
     if (this.props.selectedAnnotation._id === this.props.annotation._id){

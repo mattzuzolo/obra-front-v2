@@ -42,6 +42,25 @@ class DetailContainer extends Component {
       .catch(console.error)
   }
 
+  // static getDerivedStateFromProps(props, state) {
+  //   // debugger
+  //   if (props.selectedAnnotation !== {}) {
+  //     console.log('hack', state.selectedAnnotation)
+  //     let newSelectedAnnotation = Object.assign({}, props.selectedAnnotation);
+  //     console.log("NEW CHANGE:", newSelectedAnnotation.artwork)
+  //     // console.log("[selectedAnnotation.artwork[0]._id]", selectedAnnotation.artwork[0]._id)
+  //     // selectedAnnotation.artwork = [selectedAnnotation.artwork[0]._id]
+  //     // props.selectAnnotation({});
+  //     // return {
+  //     //   ...state,
+  //     //   selectedAnnotation,
+  //     //   displayingMarker: true,
+  //     // }
+  //   }
+  //
+  //   return null
+  // }
+
   //only displays annotations for the selected artwork
   filterAnnotationsByArtwork = (annotationData) => {
     return annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
@@ -286,28 +305,22 @@ class DetailContainer extends Component {
 
           </div>
 
-          {/*Only displays annotation container when annotations are present*/}
-          { (this.state.annotationArray.length > 0)
-                    ? <div className="div--annotation-list-container">
-                      <h1 className="h1 h1-annotation-list-container-title">Annotations:</h1>
-                      {this.state.annotationArray.map(individualAnnotation => (
-                        <AnnotationCard
-                          className="div--annotation-card"
-                          annotation={individualAnnotation}
-                          selectedAnnotation={this.state.selectedAnnotation}
-                          key={individualAnnotation._id}
-                          id={individualAnnotation._id}
-                          headline={individualAnnotation.headline}
-                          source={individualAnnotation.source}
-                          content={individualAnnotation.content}
-                          onAnnotationCardClick={this.onAnnotationCardClick}
-                        />
-                      ))}
-                    </div>
-                    : null
-          }
-
-
+          <div className="div--annotation-list-container">
+            <h1 className="h1 h1-annotation-list-container-title">Annotations:</h1>
+            {this.state.annotationArray.map(individualAnnotation => (
+              <AnnotationCard
+                className="div--annotation-card"
+                annotation={individualAnnotation}
+                selectedAnnotation={this.state.selectedAnnotation}
+                key={individualAnnotation._id}
+                id={individualAnnotation._id}
+                headline={individualAnnotation.headline}
+                source={individualAnnotation.source}
+                content={individualAnnotation.content}
+                onAnnotationCardClick={this.onAnnotationCardClick}
+              />
+            ))}
+          </div>
 
         </div>
 
@@ -341,9 +354,11 @@ class DetailContainer extends Component {
 }
 
 function mapStateToProps(state){
+  console.log('map', state)
   return {
     selectedArtwork: state.selectedArtwork,
     loggedInUser: state.loggedInUser,
+    selectedAnnotation: state.selectedAnnotation,
   }
 }
 
@@ -354,7 +369,10 @@ function mapDispatchToProps(dispatch){
     }),
     selectArtwork: (chosenArtwork) => {
       dispatch({type: "SELECT_ARTWORK", payload: chosenArtwork})
-    }
+    },
+    // selectAnnotation: (chosenAnnotation) => {
+    //   dispatch({type: "SELECT_ANNOTATION", payload: chosenAnnotation})
+    // },
   }
 }
 

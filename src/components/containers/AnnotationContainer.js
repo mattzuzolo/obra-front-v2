@@ -27,7 +27,8 @@ class AnnotationContainer extends Component {
     this.setState({ activeQuery: event.target.value })
   }
 
-  onClickAnnotation = (event, selectedArtwork) => {
+  onClickAnnotation = (event, individualAnnotation, selectedArtwork) => {
+    // this.props.selectAnnotation(individualAnnotation)
     this.props.routerProps.history.push(`/artwork/${selectedArtwork.id}`)
     return this.props.selectArtwork(selectedArtwork);
   }
@@ -58,7 +59,10 @@ function mapDispatchToProps(dispatch){
   return {
     selectArtwork: (chosenArtwork) => {
       dispatch({type: "SELECT_ARTWORK", payload: chosenArtwork})
-    }
+    },
+    selectAnnotation: (chosenAnnotation) => {
+      dispatch({type: "SELECT_ANNOTATION", payload: chosenAnnotation})
+    },
   }
 }
 
