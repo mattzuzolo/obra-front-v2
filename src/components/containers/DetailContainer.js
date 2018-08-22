@@ -274,7 +274,7 @@ class DetailContainer extends Component {
                   </div>
 
                   <div className="detail-form-textarea">
-                    <label className="detail-form-label">Annotation:</label>
+                    <label className="detail-textarea-label detail-form-label">Annotation:</label>
                     <br/>
                     <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
                     <br/>
