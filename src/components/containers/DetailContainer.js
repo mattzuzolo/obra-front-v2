@@ -177,6 +177,7 @@ class DetailContainer extends Component {
     let matchedIndex = this.state.annotationArray.findIndex(annotationArrayItem => annotationArrayItem === individualAnnotation)
     if (matchedIndex > -1) {
       let newArray = [...this.state.annotationArray]
+
       newArray[matchedIndex] = newAnnotation;
       this.setState({annotationArray: newArray})
     }

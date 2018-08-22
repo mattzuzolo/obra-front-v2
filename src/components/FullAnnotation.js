@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 class FullAnnotation extends Component {
   render(){
-    console.log("FullAnnotation props —— USER", this.props.selectedAnnotation.user[0])
-    console.log("FullAnnotation props —— USER", this.props.loggedInUser._id)
     return(
       <div className="div div--full-annotation">
         <h1>{this.props.selectedAnnotation.headline}</h1>
@@ -17,7 +15,7 @@ class FullAnnotation extends Component {
                     <Fragment>
                       <button className="button button--annotation-card button--annotation-card-update" onClick={(event) => this.props.onAnnotationUpdateFormDisplay(event)} >Update Annotation</button>
                       <button className="button button--annotation-card button--annotation-card-delete" onClick={(event) => this.props.onAnnotationCardDelete(event, this.props.selectedAnnotation)} >Delete Annotation</button>
-                    </Fragment>  
+                    </Fragment>
                     : null
           }
 
