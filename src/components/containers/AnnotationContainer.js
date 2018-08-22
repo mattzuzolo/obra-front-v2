@@ -47,7 +47,7 @@ class AnnotationContainer extends Component {
   }
 }
 
-
+//comment
 function mapStateToProps(state){
   return {
     selectedArtwork: state.selectedArtwork,
