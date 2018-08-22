@@ -160,9 +160,28 @@ class DetailContainer extends Component {
     }
 
     fetch(updateUrl, updateConfig)
-      .then(response => response.json())
+      .then(response => {
+        if(!response.ok){
+          throw new Error("You can only update your own annotations.")
+        }
+      })
+      .then(() => this.updateSpecificAnnotationInAnnotationArray(this.state.selectedAnnotation, updateSubmissionBody))
+      .catch(error => {
+        alert("You can only update your own annotations.")
+      })
       .catch(console.error)
   }
+
+  //Optimistically render the fetched update
+  updateSpecificAnnotationInAnnotationArray = (individualAnnotation, newAnnotation) => {
+    let matchedIndex = this.state.annotationArray.findIndex(annotationArrayItem => annotationArrayItem === individualAnnotation)
+    if (matchedIndex > -1) {
+      let newArray = [...this.state.annotationArray]
+      newArray[matchedIndex] = newAnnotation;
+      this.setState({annotationArray: newArray})
+    }
+  }
+
 
   onAnnotationCardDelete = (event, individualAnnotation) => {
     let urlWithId = annotationUrl + "/" + individualAnnotation._id
@@ -172,8 +191,29 @@ class DetailContainer extends Component {
           "Content-type": "application/json",
           "x-auth": localStorage.getItem("token"),
         }
+      })
+      .then(response => {
+        if(!response.ok){
+          throw new Error("You can only delete your own annotations.")
+        }
+      })
+      .then(() => this.removeSpecificAnnotationInAnnotationArray(individualAnnotation))
+      .catch(error => {
+        alert("You can only delete your own annotations.")
       });
   }
+
+  //find the "deleted" annotation in state and remove it to optimstically render
+  removeSpecificAnnotationInAnnotationArray = (individualAnnotation) => {
+    let matchedIndex = this.state.annotationArray.findIndex(annotationArrayItem => annotationArrayItem === individualAnnotation)
+    if (matchedIndex > -1) {
+      let newArray = [...this.state.annotationArray]
+      newArray.splice(matchedIndex, 1);
+      this.setState({annotationArray: newArray})
+    }
+  }
+
+
 
 
   render(){
@@ -227,8 +267,8 @@ class DetailContainer extends Component {
               <AnnotationCard
                 className="div--annotation-card"
                 annotation={individualAnnotation}
-                key={individualAnnotation.id}
-                id={individualAnnotation.id}
+                key={individualAnnotation._id}
+                id={individualAnnotation._id}
                 headline={individualAnnotation.headline}
                 source={individualAnnotation.source}
                 content={individualAnnotation.content}
