@@ -82,6 +82,11 @@ class DetailContainer extends Component {
 
       //Posts annotation to server. Then optimistically renders the new annotation
       this.postAnnotationFetch(annotationPostSubmissionBody)
+      .then(response => {
+        if(!response.ok){
+          throw new Error("You must be logged in to create an annotation")
+        }
+      })
       .then(response => response.json())
       .then(newAnnotation => this.setState({
         annotationArray: [...this.state.annotationArray, newAnnotation],
@@ -89,7 +94,10 @@ class DetailContainer extends Component {
         sourceLink: "",
         content: "",
       }) )
-      .catch(console.error)
+      .catch(error => {
+        this.props.routerProps.history.push("/login");
+        alert("You must be logged in to create an annotation")
+      })
     }
   }
 
@@ -166,6 +174,7 @@ class DetailContainer extends Component {
         }
       })
       .then(() => this.updateSpecificAnnotationInAnnotationArray(this.state.selectedAnnotation, updateSubmissionBody))
+      .then(() => this.setState({displayingFullAnnotation: false}))
       .catch(error => {
         alert("You can only update your own annotations.")
       })
@@ -177,9 +186,11 @@ class DetailContainer extends Component {
     let matchedIndex = this.state.annotationArray.findIndex(annotationArrayItem => annotationArrayItem === individualAnnotation)
     if (matchedIndex > -1) {
       let newArray = [...this.state.annotationArray]
-
       newArray[matchedIndex] = newAnnotation;
-      this.setState({annotationArray: newArray})
+      this.setState({
+        annotationArray: newArray,
+        displayingEditForm: false,
+      })
     }
   }
 
@@ -210,7 +221,10 @@ class DetailContainer extends Component {
     if (matchedIndex > -1) {
       let newArray = [...this.state.annotationArray]
       newArray.splice(matchedIndex, 1);
-      this.setState({annotationArray: newArray})
+      this.setState({
+        annotationArray: newArray,
+        displayingFullAnnotation: false
+      })
     }
   }
 
@@ -218,6 +232,7 @@ class DetailContainer extends Component {
 
 
   render(){
+    console.log("DETAIL CONTAINER PROPS", this.props)
     //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,
