@@ -12,6 +12,8 @@ import HomeContainer from "./components/containers/HomeContainer";
 import AnnotationContainer from "./components/containers/AnnotationContainer";
 import AboutContainer from "./components/containers/AboutContainer";
 import RegisterContainer from "./components/containers/RegisterContainer";
+import ProfileContainer from "./components/containers/ProfileContainer";
+
 
 class App extends Component {
 

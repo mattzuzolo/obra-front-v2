@@ -33,7 +33,6 @@ class AnnotationContainer extends Component {
   }
 
   render(){
-    console.log("ANNOTATION CONTAINER STATE", this.state.fetchedAnnotations[1])
     return(
       <div className="container div--index-container">
         {this.state.fetchedAnnotations.map(individualAnnotation => (

@@ -84,8 +84,10 @@ class DetailContainer extends Component {
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => {
         if(!response.ok){
+          console.log("NOT OK")
           throw new Error("You must be logged in to create an annotation")
         }
+        return response
       })
       .then(response => response.json())
       .then(newAnnotation => this.setState({
@@ -96,7 +98,7 @@ class DetailContainer extends Component {
       }) )
       .catch(error => {
         this.props.routerProps.history.push("/login");
-        alert("You must be logged in to create an annotation")
+        console.log("Error", error)
       })
     }
   }
@@ -231,7 +233,6 @@ class DetailContainer extends Component {
 
 
   render(){
-    console.log("DETAIL CONTAINER PROPS", this.props)
     //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,
