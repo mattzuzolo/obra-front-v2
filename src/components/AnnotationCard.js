@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 
 class AnnotationCard extends Component {
+
+  truncateString = (string) => {
+    if (string.length > 200){
+      let shortenedString = string.substring(0, 140)
+      let shortenedStringWithFullWords = shortenedString.substr(0, shortenedString.lastIndexOf(" "));
+      return shortenedStringWithFullWords + "...";
+    }
+  }
+
   render(){
     console.log("ANNOTATION CARD PROPS", this.props)
 
@@ -17,7 +26,7 @@ class AnnotationCard extends Component {
       <div onClick={(event) => this.props.onAnnotationCardClick(event, this.props.annotation)} className="div--annotation-card" style={borderStyle}>
         <h1>{this.props.headline}</h1>
         <p>{this.props.source}</p>
-        <p>{this.props.content}</p>
+        <p>{this.truncateString(this.props.content)}</p>
         <br />
 
 
