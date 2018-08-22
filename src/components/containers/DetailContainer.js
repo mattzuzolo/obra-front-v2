@@ -292,6 +292,7 @@ class DetailContainer extends Component {
               <AnnotationCard
                 className="div--annotation-card"
                 annotation={individualAnnotation}
+                selectedAnnotation={this.state.selectedAnnotation}
                 key={individualAnnotation._id}
                 id={individualAnnotation._id}
                 headline={individualAnnotation.headline}
