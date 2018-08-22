@@ -43,6 +43,7 @@ class HomeContainer extends Component {
   }
 
   render(){
+    console.log("document.referrer", document.referrer)
     return(
       <div className="container div--home-container">
         <h1 className="home-title">Obra</h1>
