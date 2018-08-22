@@ -94,7 +94,7 @@ button:hover{
 }
 
   .div--art-annotations-container{
-    height: 800px;
+    height: 100rem;
     display:flex;
   }
 
@@ -152,6 +152,14 @@ button:hover{
             color: white;
             background: #ffc900;
           }
+.div--full-annotation-container {
+  margin-top: 2rem;
+}
+
+.h1-annotation-list-container-title {
+  font-size: 3rem;
+  margin-top: 0rem;
+}
 
 .div--detail-form{
   text-align: left;

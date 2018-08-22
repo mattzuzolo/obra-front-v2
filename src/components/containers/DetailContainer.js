@@ -283,10 +283,11 @@ class DetailContainer extends Component {
 
                 </form>
               </div>
-              
+
           </div>
 
           <div className="div--annotation-list-container">
+            <h1 className="h1 h1-annotation-list-container-title">Annotations:</h1>
             {this.state.annotationArray.map(individualAnnotation => (
               <AnnotationCard
                 className="div--annotation-card"
@@ -303,6 +304,7 @@ class DetailContainer extends Component {
 
         </div>
 
+        <div className="div--full-annotation-container">
         {/*Displays full annotation when clicked via state*/}
         { this.state.displayingFullAnnotation
                   ? <FullAnnotation
@@ -325,6 +327,7 @@ class DetailContainer extends Component {
                   : null
         }
       </div>
+    </div>
     )
   }
 
