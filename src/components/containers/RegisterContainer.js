@@ -35,6 +35,7 @@ class RegisterContainer extends Component {
 
     fetch("http://localhost:4000/users", newUserPostConfig)
       .then(response => response.json())
+      .then(this.props.history.push("/login"))
       .catch(error => console.error)
   }
 

@@ -53,7 +53,8 @@ class App extends Component {
               routerProps={routerProps} />}/>
             <Route path="/about" component={AboutContainer} />
             <Route path="/login" component={LoginContainer} />
-            <Route path="/register" component={RegisterContainer} />
+            <Route path="/register" render={(routerProps) => <RegisterContainer
+              {...routerProps} />}/>
           </Switch>
       </div>
     );
