@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 
 class NavBar extends Component {
 
+  componentDidMount(){
+    this.props.history.push("/home");
+  }
+
   //clear logged in redux state, remove token and push to login upon clicking logout
   logout = () => {
     this.props.loginUser({});
     localStorage.removeItem("token");
     this.props.history.push("/login");
   }
+
+
 
   render(){
     return(

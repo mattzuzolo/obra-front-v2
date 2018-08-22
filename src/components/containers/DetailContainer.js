@@ -286,22 +286,28 @@ class DetailContainer extends Component {
 
           </div>
 
-          <div className="div--annotation-list-container">
-            <h1 className="h1 h1-annotation-list-container-title">Annotations:</h1>
-            {this.state.annotationArray.map(individualAnnotation => (
-              <AnnotationCard
-                className="div--annotation-card"
-                annotation={individualAnnotation}
-                selectedAnnotation={this.state.selectedAnnotation}
-                key={individualAnnotation._id}
-                id={individualAnnotation._id}
-                headline={individualAnnotation.headline}
-                source={individualAnnotation.source}
-                content={individualAnnotation.content}
-                onAnnotationCardClick={this.onAnnotationCardClick}
-              />
-            ))}
-          </div>
+          {/*Only displays annotation container when annotations are present*/}
+          { (this.state.annotationArray.length > 0)
+                    ? <div className="div--annotation-list-container">
+                      <h1 className="h1 h1-annotation-list-container-title">Annotations:</h1>
+                      {this.state.annotationArray.map(individualAnnotation => (
+                        <AnnotationCard
+                          className="div--annotation-card"
+                          annotation={individualAnnotation}
+                          selectedAnnotation={this.state.selectedAnnotation}
+                          key={individualAnnotation._id}
+                          id={individualAnnotation._id}
+                          headline={individualAnnotation.headline}
+                          source={individualAnnotation.source}
+                          content={individualAnnotation.content}
+                          onAnnotationCardClick={this.onAnnotationCardClick}
+                        />
+                      ))}
+                    </div>
+                    : null
+          }
+
+
 
         </div>
 
