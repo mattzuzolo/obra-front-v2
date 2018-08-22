@@ -16,6 +16,7 @@ hr {
   border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0;
+  margin-right: 1rem;
 }
 
 /* img {
@@ -87,33 +88,42 @@ button:hover{
 /* ——————————————————————— */
 
 .div--detail-container{
+  /* max-height: 200px; */
+  max-width: 100%;
 
 }
 
   .div--art-annotations-container{
+    height: 800px;
     display:flex;
-
   }
+
     .annotation-zone{
-      width:95%;
+      float: left;
       flex-grow: 1;
-
-      margin-right: 2.5%;
-      /* flex-basis: 90%; */
+      margin-right: 3rem;
     }
+
     .annotation-zone img{
+      width: 100rem;
+    }
+
+    .div--annotation-list-container{
+      overflow-y: scroll;
+      width: 100%;
 
     }
 
-    .annotation-list-container{
-
-    }
+      .div--detail-form{
+        width: 30%;
+      }
 
       .div--annotation-card{
         padding-left: 1.5rem;
         padding-right: 1.5rem;
 
-        width: 40%;
+        /* width: 100%; */
+        width: 80%;
         /* width:95%; */
         border-radius: 1rem;
         margin-bottom: 1.5%;

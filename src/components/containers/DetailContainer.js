@@ -243,6 +243,7 @@ class DetailContainer extends Component {
       <div className="container div--detail-container">
 
         <div className="div--art-annotations-container">
+
           <div className="annotation-zone">
             {/*Annotation marker is invisible until user actions displays it via state*/}
               { this.state.displayingMarker
@@ -250,32 +251,39 @@ class DetailContainer extends Component {
                         : null
               }
               <img id="detail-image" alt={this.props.selectedArtwork.title} onClick={this.onArtworkClick} src={this.props.selectedArtwork.primaryimageurl}></img>
+
               <div className="div--artwork-info">
                 <h1>{this.props.selectedArtwork.title}</h1>
                 <h3>{this.props.selectedArtwork.artist}</h3>
                 <p>Medium: {this.props.selectedArtwork.medium}</p>
                 <p>Source: <a href={this.props.selectedArtwork.url}>Harvard Art Museums</a> </p>
               </div>
+
               <hr/>
 
-              <h2>Create an annotation:</h2>
-              <form className="container div--detail-form" onSubmit={this.onAnnotationSubmit}>
-                <div className="detail-form-small-inputs">
+              <div className="container div--detail-form">
+                <h2>Create an annotation:</h2>
+                <form className="detail-form" onSubmit={this.onAnnotationSubmit}>
 
-                  <label className="detail-form-label">Headline:</label>
-                  <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
+                  <div className="detail-form-small-inputs">
+                    <label className="detail-form-label">Headline:</label>
+                    <input className="detail-form-input" placeholder="headline here" name="headline" value={this.state.headline} onChange={this.onInputChange} ></input>
 
-                  <label className="detail-form-label">Link:</label>
-                  <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
+                    <label className="detail-form-label">Link:</label>
+                    <input className="detail-form-input" placeholder="source link here" name="sourceLink" value={this.state.sourceLink} onChange={this.onInputChange} ></input>
+                  </div>
 
-                </div>
-                  <label className="detail-form-label">Annotation:</label>
-                  <br/>
-                  <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
-                  <br/>
-                  <button className="detail-form-button">Submit annotation</button>
+                  <div className="detail-form-textarea">
+                    <label className="detail-form-label">Annotation:</label>
+                    <br/>
+                    <textarea className="detail-form-textarea" placeholder="share your annotation here" name="content" value={this.state.content} onChange={this.onInputChange} ></textarea>
+                    <br/>
+                    <button className="detail-form-button">Submit annotation</button>
+                  </div>
 
-              </form>
+                </form>
+              </div>
+              
           </div>
 
           <div className="div--annotation-list-container">
@@ -289,10 +297,10 @@ class DetailContainer extends Component {
                 source={individualAnnotation.source}
                 content={individualAnnotation.content}
                 onAnnotationCardClick={this.onAnnotationCardClick}
-
               />
             ))}
           </div>
+
         </div>
 
         {/*Displays full annotation when clicked via state*/}
