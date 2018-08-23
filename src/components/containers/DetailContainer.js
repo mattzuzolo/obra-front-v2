@@ -239,7 +239,7 @@ class DetailContainer extends Component {
 
 
   render(){
-    console.log("DETAIL STATE AT RENDER", this.state.annotationArray)
+    // console.log("DETAIL STATE AT RENDER", this.state.annotationArray)
     //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,

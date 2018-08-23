@@ -4,13 +4,16 @@ import { connect } from 'react-redux';
 
 class FullAnnotation extends Component {
   render(){
+    // console.log("this.props.selectedAnnotation.user[0]", this.props.selectedAnnotation.user[0])
+    // console.log("this.props.loggedInUser._id", this.props.loggedInUser._id)
+
     return(
       <div className="div div--full-annotation">
         <h1>{this.props.selectedAnnotation.headline}</h1>
         <p>{this.props.selectedAnnotation.content}</p>
         <p>Source: <a href={this.props.selectedAnnotation.source}>{this.props.selectedAnnotation.source}</a></p>
 
-          { (this.props.selectedAnnotation.user[0] === this.props.loggedInUser._id)
+          { (this.props.selectedAnnotation.user[0]._id == this.props.loggedInUser._id)
                     ?
                     <Fragment>
                       <button className="button button--annotation-card button--annotation-card-update" onClick={(event) => this.props.onAnnotationUpdateFormDisplay(event)} >Update Annotation</button>

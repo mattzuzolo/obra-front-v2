@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 class AnnotationCard extends Component {
 
   truncateString = (string) => {
-    if (string.length > 200){
+    if (string.length > 140){
       let shortenedString = string.substring(0, 140)
       let shortenedStringWithFullWords = shortenedString.substr(0, shortenedString.lastIndexOf(" "));
+      console.log("TRUNCATED", shortenedStringWithFullWords + "...")
       return shortenedStringWithFullWords + "...";
     }
+    return string;
   }
 
   getNameFromEmail = (emailAddress) => {
-    console.log("EMAIL IN REDUX", this.props.loggedInUser.email)
     if(emailAddress === this.props.loggedInUser.email){
       return "YOU";
     }
@@ -37,10 +38,12 @@ class AnnotationCard extends Component {
       }
     }
 
+    // console.log("PROPS IN ANNOTATION CARD", this.props.annotation)
+
     return(
       <div onClick={(event) => this.props.onAnnotationCardClick(event, this.props.annotation)} className="div--annotation-card" style={borderStyle}>
         <h1>{this.props.headline}</h1>
-        <p>{this.props.source}</p>
+        <p><a href={this.props.source}>{this.props.source}</a></p>
         <p>{this.truncateString(this.props.content)}</p>
         <p className="annotation-creator">Creator: {this.getNameFromEmail(this.props.creator)}</p>
         <br />
