@@ -9,14 +9,12 @@ class NavBar extends Component {
     this.props.history.push("/home");
   }
 
-  //clear logged in redux state, remove token and push to login upon clicking logout
+  //clear loggedin redux state, remove token and push to login upon clicking logout
   logout = () => {
     this.props.loginUser({});
     localStorage.removeItem("token");
     this.props.history.push("/login");
   }
-
-
 
   render(){
     return(
@@ -30,6 +28,7 @@ class NavBar extends Component {
                     ?
                     <Fragment>
                       <button className="nav-item div--nav-bar-item nav-right button-logout" onClick={this.logout}>Logout</button>
+                      <Link className="nav-item div--nav-bar-item nav-right" to="/me">Profile</Link>
                     </Fragment>
                     :
                     <Fragment>
