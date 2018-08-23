@@ -7,6 +7,7 @@ import FullAnnotation from "../FullAnnotation"
 import EditForm from "../EditForm"
 
 const annotationUrl = "http://localhost:4000/annotations";
+const annotationUrlwithUserData = "http://localhost:4000/annotations-user";
 
 class DetailContainer extends Component {
   constructor(props){
@@ -84,7 +85,6 @@ class DetailContainer extends Component {
       this.postAnnotationFetch(annotationPostSubmissionBody)
       .then(response => {
         if(!response.ok){
-          console.log("NOT OK")
           throw new Error("You must be logged in to create an annotation")
         }
         return response
@@ -98,7 +98,6 @@ class DetailContainer extends Component {
       }) )
       .catch(error => {
         this.props.routerProps.history.push("/login");
-        console.log("Error", error)
       })
     }
   }

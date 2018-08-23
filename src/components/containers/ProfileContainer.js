@@ -40,7 +40,6 @@ class ProfileContainer extends Component {
   }
 
   render(){
-    console.log("PROFILECONTAINER STATE AT RENDER", this.state.myAnnotationArray)
     return(
       <div className="container div--profile-container">
         <h1>Welcome to Obra, {this.getNameFromEmail(this.props.loggedInUser.email)}.</h1>
