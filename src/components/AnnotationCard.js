@@ -34,7 +34,7 @@ class AnnotationCard extends Component {
         <h1>{this.props.headline}</h1>
         <p>{this.props.source}</p>
         <p>{this.truncateString(this.props.content)}</p>
-        <p className="annotation-creator">Shared by: {this.getNameFromEmail(this.props.creator)}</p>
+        <p className="annotation-creator">Creator: {this.getNameFromEmail(this.props.creator)}</p>
         <br />
 
 
