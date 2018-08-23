@@ -31,9 +31,9 @@ class AnnotationCard extends Component {
     let borderStyle ={}
     if (this.props.selectedAnnotation._id === this.props.annotation._id){
       borderStyle = {
-        "border-style": "solid",
-        "border-width": "2.5px",
-        "border-color": "#39ff14",
+        "borderStyle": "solid",
+        "borderWidth": "2.5px",
+        "borderColor": "#39ff14",
       }
     }
 
