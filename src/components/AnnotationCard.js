@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 
 class AnnotationCard extends Component {
 
@@ -11,11 +13,17 @@ class AnnotationCard extends Component {
   }
 
   getNameFromEmail = (emailAddress) => {
-    if(emailAddress){
+    console.log("EMAIL IN REDUX", this.props.loggedInUser.email)
+    if(emailAddress === this.props.loggedInUser.email){
+      return "YOU";
+    }
+    else if (emailAddress){
       let name = emailAddress.split("@");
       return name[0];
     }
-    return emailAddress
+    else {
+      return emailAddress;
+    }
   }
 
   render(){
@@ -43,4 +51,11 @@ class AnnotationCard extends Component {
   }
 }
 
-export default AnnotationCard;
+
+function mapStateToProps(state){
+  return {
+    loggedInUser: state.loggedInUser,
+  }
+}
+
+export default connect(mapStateToProps)(AnnotationCard);
