@@ -8,7 +8,6 @@ class AnnotationCard extends Component {
     if (string.length > 140){
       let shortenedString = string.substring(0, 140)
       let shortenedStringWithFullWords = shortenedString.substr(0, shortenedString.lastIndexOf(" "));
-      console.log("TRUNCATED", shortenedStringWithFullWords + "...")
       return shortenedStringWithFullWords + "...";
     }
     return string;

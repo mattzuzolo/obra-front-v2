@@ -157,7 +157,7 @@ class DetailContainer extends Component {
     let updateUrl = `http://localhost:4000/annotations/${this.state.selectedAnnotation._id}`
     let updateSubmissionBody = {
         artwork: [this.state.selectedAnnotation.artwork],
-        user: [this.state.selectedAnnotation.user],
+        user: this.state.selectedAnnotation.user,
         // _id: this.state.selectedAnnotation._id,
         headline: formState.headline,
         content: formState.content,
@@ -165,6 +165,9 @@ class DetailContainer extends Component {
         xCoord: formState.xCoord,
         yCoord: formState.yCoord,
     }
+
+    // console.log("UPDATE URL:", updateUrl);
+    console.log("updateSubmissionBody",  updateSubmissionBody);
 
     let updateConfig = {
       method: 'PUT',
@@ -175,6 +178,9 @@ class DetailContainer extends Component {
       body: JSON.stringify(updateSubmissionBody)
     }
 
+    console.log("updateConfig",  updateConfig);
+
+
     fetch(updateUrl, updateConfig)
       .then(response => {
         if(!response.ok){
@@ -184,7 +190,7 @@ class DetailContainer extends Component {
       .then(() => this.updateSpecificAnnotationInAnnotationArray(this.state.selectedAnnotation, updateSubmissionBody))
       .then(() => this.setState({displayingFullAnnotation: false}))
       .catch(error => {
-        alert("You can only update your own annotations.")
+        console.log("CAUGHT ERROR. You can only update your own annotations.")
       })
   }
 
@@ -239,7 +245,7 @@ class DetailContainer extends Component {
 
 
   render(){
-    // console.log("DETAIL STATE AT RENDER", this.state.annotationArray)
+    console.log("DETAIL STATE AT RENDER", this.state.annotationArray)
     //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,
