@@ -41,7 +41,9 @@ class LoginContainer extends Component {
         this.props.loginUser(json._doc)
         this.props.history.push("/artwork");
       })
-      .catch(console.error)
+      .catch(error => {
+        alert("Login failed.")
+      })
   }
 
   render(){
