@@ -167,7 +167,6 @@ class DetailContainer extends Component {
     }
 
     // console.log("UPDATE URL:", updateUrl);
-    console.log("updateSubmissionBody",  updateSubmissionBody);
 
     let updateConfig = {
       method: 'PUT',
@@ -178,7 +177,6 @@ class DetailContainer extends Component {
       body: JSON.stringify(updateSubmissionBody)
     }
 
-    console.log("updateConfig",  updateConfig);
 
 
     fetch(updateUrl, updateConfig)
@@ -190,7 +188,7 @@ class DetailContainer extends Component {
       .then(() => this.updateSpecificAnnotationInAnnotationArray(this.state.selectedAnnotation, updateSubmissionBody))
       .then(() => this.setState({displayingFullAnnotation: false}))
       .catch(error => {
-        console.log("CAUGHT ERROR. You can only update your own annotations.")
+        alert("You must be logged in to update your annotations")
       })
   }
 
