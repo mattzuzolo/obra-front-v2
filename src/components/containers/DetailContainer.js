@@ -36,17 +36,24 @@ class DetailContainer extends Component {
       .catch(console.error)
 
     //Fetches annotation list for the specific work displayed
-    fetch(annotationUrl)
+    fetch(annotationUrlwithUserData)
       .then(response => response.json())
-      .then(data => this.filterAnnotationsByArtwork(data.annotations))
+      // .then(data => console.log("INSIDE GET WITH USERS", data))
+      .then(data => this.filterAnnotationsByArtwork(data.annotation))
+      // .then(filteredData => console.log("DATA AFTER FILTERING", filteredData))
       .then(filteredData => this.setState({annotationArray: filteredData}))
       .catch(console.error)
   }
 
-  //only displays annotations for the selected artwork
   filterAnnotationsByArtwork = (annotationData) => {
+    // console.log("annotationData in filterannotations", annotationData[0].artwork)
     return annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
   }
+
+  //only displays annotations for the selected artwork
+  // filterAnnotationsByArtwork = (annotationData) => {
+  //   return annotationData.filter(individualAnnotation => individualAnnotation.artwork[0] == this.props.selectedArtwork._id);
+  // }
 
   onInputChange = (event) => {
     let fieldName = event.target.name;
@@ -232,6 +239,7 @@ class DetailContainer extends Component {
 
 
   render(){
+    console.log("DETAIL STATE AT RENDER", this.state.annotationArray)
     //Style for annotation marker that updates on each render
     let annotationMarkerStyle = {
       top: this.state.yCoord,
@@ -296,6 +304,7 @@ class DetailContainer extends Component {
                           selectedAnnotation={this.state.selectedAnnotation}
                           key={individualAnnotation._id}
                           id={individualAnnotation._id}
+                          creator={individualAnnotation.user[0].email}
                           headline={individualAnnotation.headline}
                           source={individualAnnotation.source}
                           content={individualAnnotation.content}
