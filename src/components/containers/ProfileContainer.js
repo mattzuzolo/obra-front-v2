@@ -31,13 +31,27 @@ class ProfileContainer extends Component {
     return this.props.selectArtwork(selectedArtwork);
   }
 
+  getNameFromEmail = (emailAddress) => {
+    if(emailAddress){
+      let name = emailAddress.split("@");
+      return name[0];
+    }
+    return emailAddress
+  }
+
   render(){
     console.log("PROFILECONTAINER STATE AT RENDER", this.state.myAnnotationArray)
     return(
       <div className="container div--profile-container">
-        <h1>Welcome to your homepage.</h1>
+        <h1>Welcome to Obra, {this.getNameFromEmail(this.props.loggedInUser.email)}.</h1>
         <p><span style={{ fontWeight: 'bold' }}>Your email:</span> {this.props.loggedInUser.email}</p>
-        <h3>Your annotations:</h3>
+
+          { this.state.myAnnotationArray.length > 0
+                    ? <h1>Your annotations:</h1>
+                    : <h1>You haven't made any annotations!</h1>
+          }
+
+
 
           {this.state.myAnnotationArray.map(individualAnnotation => (
             <AnnotationListItem
