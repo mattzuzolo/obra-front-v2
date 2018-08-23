@@ -31,7 +31,7 @@ class App extends Component {
       .catch(error => {
         //Remove token and send user to Login if token is not found
         localStorage.removeItem("token");
-        this.props.history.push("/login")
+        this.props.history.push("/login");
       })
   }
 
@@ -56,7 +56,7 @@ class App extends Component {
             <Route path="/register" render={(routerProps) => <RegisterContainer
               {...routerProps} />}/>
             <Route path="/me" render={(routerProps) => <ProfileContainer
-              routerProps={routerProps} />}/>
+              {...routerProps} />}/>
           </Switch>
       </div>
     );

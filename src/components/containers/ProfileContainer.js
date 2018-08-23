@@ -24,6 +24,10 @@ class ProfileContainer extends Component {
     })
     .then(response => response.json())
     .then(data => this.setState({myAnnotationArray: data.annotations}))
+    .catch(error => {
+      this.props.history.push("/login");
+      alert("You must be logged in to view this page");
+    })
   }
 
   onClickAnnotation = (event, selectedArtwork) => {
